@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/login_bg"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/fac_bg">
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/login_bg"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="8dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="8dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Log in"
+            android:background="#1574ED"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:textColor="#0523A5">
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:textColor="#757C98">
+        </TextView>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Create Facebook Account"
+            android:background="#1F7E21"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
