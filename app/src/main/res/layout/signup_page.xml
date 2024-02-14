@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="#3b5998">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="273dp"
+        android:layout_height="116dp"
+        app:srcCompat="@drawable/facebook_logo"
+        app:tint="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create new facebook account"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:gravity="center"/>
+
+    <EditText
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="16dp"
+        android:id="@+id/editTextText"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="First Name"
+        android:inputType="text" />
+
+    <EditText
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="16dp"
+        android:id="@+id/editTextText2"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Surname" />
+
+    <EditText
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="16dp"
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="16dp"
+        android:id="@+id/editTextNumberPassword"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword" />
+    <EditText
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="16dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Birthday"
+        android:inputType="date" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="66dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edittext"
+            android:text="Female" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Upload photo" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="120dp"
+        android:layout_height="127dp"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/default_profile_image" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:background="@drawable/green_button"
+        android:text="Sign up" />
+</LinearLayout>

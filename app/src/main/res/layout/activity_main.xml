@@ -19,13 +19,16 @@
         android:orientation="vertical"
         android:gravity="center">
 
+
         <EditText
+            android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
+            android:hint="Username"
+            android:inputType="text"
             android:padding="8dp"/>
         <EditText
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:hint="Password"
@@ -33,11 +36,13 @@
             android:padding="8dp"/>
 
         <Button
+            android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Log in"
-            android:background="#1574ED"/>
+            android:background="#1574ED"
+            android:textAllCaps="false"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -45,7 +50,8 @@
             android:text="Forgot Password?"
             android:gravity="center"
             android:layout_marginBottom="20dp"
-            android:textColor="#0523A5">
+            android:textColor="#0523A5"
+            android:textAllCaps="false">
         </TextView>
         <TextView
             android:layout_width="match_parent"
@@ -56,12 +62,13 @@
             android:textColor="#757C98">
         </TextView>
         <Button
+            android:id="@+id/btn_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Create Facebook Account"
-            android:background="#1F7E21"
-            />
+            android:background="@color/green"
+            android:textAllCaps="false"/>
     </LinearLayout>
 
 </RelativeLayout>

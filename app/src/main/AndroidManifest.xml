@@ -13,6 +13,12 @@
         android:theme="@style/Theme.ProjectP2_Android"
         tools:targetApi="31">
         <activity
+            android:name=".Feed"
+            android:exported="false" />
+        <activity
+            android:name=".SignUp"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
