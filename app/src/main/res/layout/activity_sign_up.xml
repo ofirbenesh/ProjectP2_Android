@@ -11,14 +11,14 @@
         android:id="@+id/imageView"
         android:layout_width="273dp"
         android:layout_height="116dp"
-        app:srcCompat="@drawable/facebook_logo"
+        app:srcCompat="@drawable/foobook2"
         app:tint="@android:color/white" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create new facebook account"
+        android:text="Create new foobook account"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:gravity="center"/>

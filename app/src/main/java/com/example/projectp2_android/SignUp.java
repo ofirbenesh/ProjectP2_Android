@@ -47,6 +47,9 @@ public class SignUp extends AppCompatActivity {
                     User currUser = saveUser(username, password);
                     Intent intent = new Intent(SignUp.this, MainActivity.class);
                     intent.putExtra("user",currUser);
+                    if (profilePictureUri != null) {
+                        intent.putExtra("img",profilePictureUri);
+                    }
                     startActivity(intent);
                 } else {
                     // Display error message if form is invalid
@@ -92,7 +95,7 @@ public class SignUp extends AppCompatActivity {
 
         public User saveUser(EditText username, EditText password) {
             User newUser = new User(username.getText().toString(),
-                    password.getText().toString(), profilePictureUri);
+                    password.getText().toString());
             return newUser;
         }
 

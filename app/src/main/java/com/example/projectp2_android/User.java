@@ -11,10 +11,9 @@ public class User implements Serializable {
     private String userPassword;
     private Uri profilePictureUri;
 
-    public User(String userName, String userPassword, Uri profilePictureUri) {
+    public User(String userName, String userPassword) {
         this.userName = userName;
         this.userPassword = userPassword;
-        this.profilePictureUri = profilePictureUri;
     }
 
     public String getUserName() {

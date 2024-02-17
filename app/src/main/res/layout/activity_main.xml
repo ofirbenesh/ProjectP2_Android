@@ -35,13 +35,16 @@
             android:inputType="textPassword"
             android:padding="8dp"/>
 
-        <Button
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Log in"
-            android:background="#1574ED"
+            android:textSize="22dp"
+            android:backgroundTint="#1574ED"
+            android:textColor="@color/white"
             android:textAllCaps="false"/>
 
         <TextView
@@ -61,13 +64,16 @@
             android:layout_marginBottom="20dp"
             android:textColor="#757C98">
         </TextView>
-        <Button
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Create Facebook Account"
-            android:background="@color/green"
+            android:text="Create Foobook Account"
+            android:textSize="22dp"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/white"
             android:textAllCaps="false"/>
     </LinearLayout>
 
