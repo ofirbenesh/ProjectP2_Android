@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.projectp2_android.adapters.PostsListAdapter;
 import com.example.projectp2_android.entities.Post;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Feed extends AppCompatActivity {
@@ -34,9 +35,11 @@ public class Feed extends AppCompatActivity {
         Uri img = (Uri) intent.getParcelableExtra("img");
         if (user != null) {
             userName = user.getUserName();
-            profilePictureUri = img;
-            profileImageView.setImageURI(img);
             userNameText.setText(userName);
+            if (img != null) {
+                profilePictureUri = img;
+                profileImageView.setImageURI(img);
+            }
         }
         else {
             userNameText.setText("EMPTY USER");
@@ -46,7 +49,11 @@ public class Feed extends AppCompatActivity {
         final PostsListAdapter adapter = new PostsListAdapter(this);
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
-        List<Post> posts = new JsonFileReader().readPostsFromJson(this, "posts.json");
+
+        List<Post> posts = new ArrayList<>();
+        posts.add(new Post("jhon doe", "hello world", R.drawable.cake));
+
+        //List<Post> posts = new JsonFileReader().readPostsFromJson(this, "posts.json");
         adapter.setPosts(posts);
         //endregion
     }

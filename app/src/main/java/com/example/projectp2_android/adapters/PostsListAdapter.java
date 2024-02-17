@@ -21,7 +21,7 @@ import java.util.List;
 
 public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.PostViewHolder> {
     class PostViewHolder extends RecyclerView.ViewHolder {
-        private final LinearLayout tvAuthor;
+        private final TextView tvAuthor;
         private final TextView tvContent;
         private final ImageView ivPic;
 
@@ -51,10 +51,9 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         if (posts != null) {
             final Post current = posts.get(position);
-            //holder.tvAuthor.;
-            holder.tvContent.setText(current.getText());
-            //holder.ivPic.setImageResource(current.getImage());
-
+            holder.tvAuthor.setText(current.getAuthor());
+            holder.tvContent.setText(current.getContent());
+            holder.ivPic.setImageResource(current.getPic());
         }
 
     }

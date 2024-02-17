@@ -6,54 +6,55 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/postsButtons"
+        android:id="@+id/topPage"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageButton
-            android:id="@+id/likeButton"
+        <ImageView
+            android:id="@+id/profilePic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/default_profile_image"
+            android:layout_marginEnd="8dp"/>
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/white"
-            app:srcCompat="@drawable/like"
-            android:scaleType="fitCenter"/>
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/commentButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/white"
-            app:srcCompat="@drawable/comment"
-            android:scaleType="fitCenter"/>
+            <TextView
+                android:id="@+id/postsAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textSize="24dp"
+                android:textStyle="bold"/>
 
+            <TextView
+                android:id="@+id/postsDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textSize="20sp"/>
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/shareButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/white"
-            app:srcCompat="@drawable/share"
-            android:scaleType="fitCenter"/>
     </LinearLayout>
 
     <EditText
         android:id="@+id/postsText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postsAuthor" />
+        app:layout_constraintTop_toBottomOf="@+id/topPage">
+
+    </EditText>
 
     <ImageView
         android:id="@+id/postsImage"
@@ -66,34 +67,41 @@
         app:layout_constraintTop_toBottomOf="@+id/postsText" />
 
     <LinearLayout
-        android:id="@+id/postsAuthor"
-        android:layout_width="409dp"
-        android:layout_height="178dp"
+        android:id="@+id/postsButtons"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/textView4"
+        <ImageButton
+            android:id="@+id/likeButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:background="@color/white"
+            app:srcCompat="@drawable/small_like"
+            android:scaleType="fitCenter"/>
 
-        <TextView
-            android:id="@+id/textView5"
+        <ImageButton
+            android:id="@+id/commentButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:background="@color/white"
+            app:srcCompat="@drawable/comment_btn"
+            android:scaleType="fitCenter"/>
 
-        <ImageView
-            android:id="@+id/PostsPP"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="41dp" />
+
+        <ImageButton
+            android:id="@+id/shareButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            app:srcCompat="@drawable/share_btn"
+            android:scaleType="fitCenter"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
