@@ -11,6 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.projectp2_android.adapters.PostsListAdapter;
+import com.example.projectp2_android.entities.Post;
+
+import java.util.List;
+
 public class Feed extends AppCompatActivity {
     private String userName;
     private ImageView profileImageView;
@@ -36,13 +41,13 @@ public class Feed extends AppCompatActivity {
         else {
             userNameText.setText("EMPTY USER");
         }
-//        //region recyclerView
-//        RecyclerView lstPosts = findViewById(R.id.lstPosts);
-//        final PostsListAdapter adapter = new PostsListAdapter(this);
-//        lstPosts.setAdapter(adapter);
-//        lstPosts.setLayoutManager(new LinearLayoutManager(this));
-//        List<Post> posts = new JsonFileReader().readPostsFromJson(this, "posts.json");
-//        adapter.setPosts(posts);
-//        //endregion
+        //region recyclerView
+        RecyclerView lstPosts = findViewById(R.id.lstPosts);
+        final PostsListAdapter adapter = new PostsListAdapter(this);
+        lstPosts.setAdapter(adapter);
+        lstPosts.setLayoutManager(new LinearLayoutManager(this));
+        List<Post> posts = new JsonFileReader().readPostsFromJson(this, "posts.json");
+        adapter.setPosts(posts);
+        //endregion
     }
 }

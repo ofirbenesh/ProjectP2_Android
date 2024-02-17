@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.example.projectp2_android.User;
 
 import java.util.Date;
-import java.util.List;
 
 public class Post implements Parcelable {
 
@@ -61,6 +60,9 @@ public class Post implements Parcelable {
 
     public String getText() {
         return text;
+    }
+    public String getAuthor() {
+        return user.getUserName();
     }
 
     public void setText(String text) {

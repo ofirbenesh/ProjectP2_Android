@@ -1,0 +1,305 @@
+[
+  {
+    "postId": "1",
+    "date": "2022-02-14T12:30:00Z",
+    "user": {
+      "id": "1",
+      "name": "John Doe",
+      "tag": "@JohnDoe",
+      "profilePicture": "R.drawable.john_doe.jpeg"
+    },
+    "text": "I made a cake",
+    "image": "R.drawable.cake.jpg",
+    "likes": 15,
+    "comments": [
+      {
+        "commentId": "101",
+        "date": "2022-02-14T12:35:00Z",
+        "user": {
+          "id": "2",
+          "name": "Jane Smith",
+          "tag": "@JaneSmith",
+          "profilePicture": "R.drawable.user4.png"
+        },
+        "text": "Nice post!",
+        "likes": 5
+      },
+      {
+        "commentId": "102",
+        "date": "2022-02-14T12:40:00Z",
+        "user": {
+          "id": "3",
+          "name": "Bob Johnson",
+          "tag": "@BobJohnson",
+          "profilePicture": "R.drawable.user3.png"
+        },
+        "text": "Keep it up!",
+        "likes": 3
+      }
+    ]
+  },
+  {
+    "postId": "2",
+    "date": "2023-03-14T12:30:00Z",
+    "user": {
+      "id": "2",
+      "name": "Jane Smith",
+      "tag": "@JaneSmith",
+      "profilePicture": "R.drawable.user4.png"
+    },
+    "text": "My baby! ",
+    "image": "R.drawable.baby.png",
+    "likes": 48,
+    "comments": [
+      {
+        "commentId": "17",
+        "date": "2023-03-15T12:35:00Z",
+        "user": {
+          "id": "4",
+          "name": "Billy Bones",
+          "tag": "@BillyBones",
+          "profilePicture": "R.drawable.user2.png"
+        },
+        "text": "Cute!",
+        "likes": 5
+      },
+      {
+        "commentId": "18",
+        "date": "2023-03-16T12:40:00Z",
+        "user": {
+          "id": "3",
+          "name": "Bob Johnson",
+          "tag": "@BobJohnson",
+          "profilePicture": "R.drawable.user3.png"
+        },
+        "text": "Lots of love!",
+        "likes": 3
+      }
+    ]
+  },
+  {
+    "postId": "3",
+    "date": "2019-02-14T12:30:00Z",
+    "user": {
+      "id": "5",
+      "name": "Ben Watson",
+      "tag": "@BenWatson",
+      "profilePicture": "R.drawable.user5.png"
+    },
+    "text": "sunset",
+    "image": "R.drawable.sunset.png",
+    "likes": 0,
+    "comments": []
+  },
+  {
+    "postId": "4",
+    "date": "2022-02-14T12:30:00Z",
+    "user": {
+      "id": "1",
+      "name": "John Doe",
+      "tag": "@JohnDoe",
+      "profilePicture": "R.drawable.john_doe.png"
+    },
+    "text": "Watching the game tonight",
+    "image": "R.drawable.basketball.png",
+    "likes": 9,
+    "comments": [
+      {
+        "commentId": "101",
+        "date": "2022-02-14T12:35:00Z",
+        "user": {
+          "id": "2",
+          "name": "Jane Smith",
+          "tag": "@JaneSmith",
+          "profilePicture": "R.drawable.user4.png"
+        },
+        "text": "Fun!",
+        "likes": 5
+      },
+      {
+        "commentId": "102",
+        "date": "2022-02-14T12:40:00Z",
+        "user": {
+          "id": "3",
+          "name": "Bob Johnson",
+          "tag": "@BobJohnson",
+          "profilePicture": "R.drawable.user3.png"
+        },
+        "text": "Go Eagles!",
+        "likes": 3
+      }
+    ]
+  },
+  {
+    "postId": "5",
+    "date": "2022-02-14T12:30:00Z",
+    "user": {
+      "id": "4",
+      "name": "Billy Bones",
+      "tag": "@BillyBones",
+      "profilePicture": "R.drawable.user2.png"
+    },
+    "text": "My cat",
+    "image": "R.drawable.cat.png",
+    "likes": 3,
+    "comments": [
+      {
+        "commentId": "101",
+        "date": "2022-02-14T12:35:00Z",
+        "user": {
+          "id": "2",
+          "name": "Jane Smith",
+          "tag": "@JaneSmith",
+          "profilePicture": "R.drawable.user4.png"
+        },
+        "text": "sweet!",
+        "likes": 5
+      }
+    ]
+  },
+  {
+    "postId": "6",
+    "date": "2022-09-01T12:30:00Z",
+    "user": {
+      "id": "1",
+      "name": "John Doe",
+      "tag": "@JohnDoe",
+      "profilePicture": "R.drawable.john_doe.png"
+    },
+    "text": "Eating lunch",
+    "image": "R.drawable.lunch.png",
+    "likes": 17,
+    "comments": [
+      {
+        "commentId": "101",
+        "date": "2022-09-01T12:35:00Z",
+        "user": {
+          "id": "2",
+          "name": "Jane Smith",
+          "tag": "@JaneSmith",
+          "profilePicture": "R.drawable.user4.png"
+        },
+        "text": "enjoy!",
+        "likes": 5
+      },
+      {
+        "commentId": "102",
+        "date": "2022-09-01T12:40:00Z",
+        "user": {
+          "id": "3",
+          "name": "Bob Johnson",
+          "tag": "@BobJohnson",
+          "profilePicture": "R.drawable.user3.png"
+        },
+        "text": "tasty!",
+        "likes": 3
+      }
+    ]
+  },
+  {
+    "postId": "7",
+    "date": "2018-02-19T12:30:00Z",
+    "user": {
+      "id": "2",
+      "name": "Jane Smith",
+      "tag": "@JaneSmith",
+      "profilePicture": "R.drawable.user4.png"
+    },
+    "text": "Rose from my husband! love him!",
+    "image": "R.drawable.rose.png",
+    "likes": 15,
+    "comments": [
+      {
+        "commentId": "101",
+        "date": "2018-02-20T12:35:00Z",
+        "user": {
+          "id": "4",
+          "name": "Billy Bones",
+          "tag": "@BillyBones",
+          "profilePicture": "R.drawable.user2.png"
+        },
+        "text": "Nice post!",
+        "likes": 5
+      },
+      {
+        "commentId": "102",
+        "date": "2018-02-20T12:40:00Z",
+        "user": {
+          "id": "3",
+          "name": "Bob Johnson",
+          "tag": "@BobJohnson",
+          "profilePicture": "R.drawable.user3.png"
+        },
+        "text": "Lovely!",
+        "likes": 3
+      }
+    ]
+  },
+  {
+    "postId": "8",
+    "date": "2024-02-14T12:30:00Z",
+    "user": {
+      "id": "5",
+      "name": "Ben Watson",
+      "tag": "@BenWatson",
+      "profilePicture": "R.drawable.user5.png"
+    },
+    "text": "forest",
+    "image": "R.drawable.forest.png",
+    "likes": 0,
+    "comments": []
+  },
+  {
+    "postId": "9",
+    "date": "2022-02-14T12:30:00Z",
+    "user": {
+      "id": "1",
+      "name": "John Doe",
+      "tag": "@JohnDoe",
+      "profilePicture": "R.drawable.john_doe.png"
+    },
+    "text": "I made a cake",
+    "image": "R.drawable.cake.png",
+    "likes": 15,
+    "comments": [
+      {
+        "commentId": "101",
+        "date": "2022-02-14T12:35:00Z",
+        "user": {
+          "id": "2",
+          "name": "Jane Smith",
+          "tag": "@JaneSmith",
+          "profilePicture": "R.drawable.user4.png"
+        },
+        "text": "Nice post!",
+        "likes": 5
+      },
+      {
+        "commentId": "102",
+        "date": "2022-02-14T12:40:00Z",
+        "user": {
+          "id": "3",
+          "name": "Bob Johnson",
+          "tag": "@BobJohnson",
+          "profilePicture": "R.drawable.user3.png"
+        },
+        "text": "Keep it up!",
+        "likes": 3
+      }
+    ]
+  },
+  {
+    "postId": "10",
+    "date": "2021-04-28T12:30:00Z",
+    "user": {
+      "id": "1",
+      "name": "Ben Watson",
+      "tag": "@BenWatson",
+      "profilePicture": "R.drawable.user5.png"
+    },
+    "text": "I have a birthday today",
+    "image": "R.drawable.birthday.png",
+    "likes": 0,
+    "comments": []
+  }
+]

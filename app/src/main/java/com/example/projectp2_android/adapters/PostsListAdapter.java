@@ -11,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import com.example.projectp2_android.entities.Post;
 import com.example.projectp2_android.R;
 
@@ -48,9 +51,9 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         if (posts != null) {
             final Post current = posts.get(position);
-            //holder.tvAuthor = current.se
+            //holder.tvAuthor.;
             holder.tvContent.setText(current.getText());
-            // holder.ivPic.setImageResource(current.getImage());
+            //holder.ivPic.setImageResource(current.getImage());
 
         }
 
