@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,12 +35,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = getIntent();
                 User user = (User) intent.getSerializableExtra("user");
+                Uri img = (Uri) intent.getParcelableExtra("img");
                 String savedUsername = user.getUserName();
                 String savedPassword = user.getUserPassword();
                 if (user_name.getText().toString().equals(savedUsername) && password.getText().toString().equals(savedPassword)) {
                     // Login successful
                     Intent i = new Intent(MainActivity.this, Feed.class);
                     i.putExtra("user",user);
+                    i.putExtra("img", img);
                     startActivity(i);
                 } else {
                     // Invalid credentials
