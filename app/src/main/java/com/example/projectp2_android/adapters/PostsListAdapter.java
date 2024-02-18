@@ -23,13 +23,43 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
     class PostViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvAuthor;
         private final TextView tvContent;
-        private final ImageView ivPic;
+        //private final ImageView ivPic;
+        private final TextView tvLikes;
+        //private ImageButton likeButton;
 
         public PostViewHolder(View itemView) {
             super(itemView);
             this.tvAuthor = itemView.findViewById(R.id.postsAuthor);
             this.tvContent = itemView.findViewById(R.id.postsText);
-            this.ivPic = itemView.findViewById(R.id.postsImage);
+            //this.ivPic = itemView.findViewById(R.id.postsImage);
+            this.tvLikes = itemView.findViewById(R.id.num_of_likes);
+//            Post current = null;
+//            int position = getAdapterPosition();
+//            if (position != RecyclerView.NO_POSITION) {
+//                current = posts.get(position);
+//            }
+//            //region like button
+//            Post finalCurrent = current;
+//            likeButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (finalCurrent != null) {
+//                        finalCurrent.setLikes(finalCurrent.getLikes() + 1);
+//                    }
+//                    notifyDataSetChanged();
+//                }
+//            });
+
+            //region comments recycle layout
+//            RecyclerView lstComments = itemView.findViewById(R.id.commentList);
+//            final CommentListAdapter comAdapter = new CommentListAdapter(itemView.getContext());
+//            lstComments.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
+//            lstComments.setAdapter(comAdapter);
+//            List<Comment> comments = current.getComments();
+//            if (comments != null) {
+//                comAdapter.setComments(comments);
+//            }
+//            //endregion
         }
     }
 
@@ -53,9 +83,10 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
             final Post current = posts.get(position);
             holder.tvAuthor.setText(current.getAuthor());
             holder.tvContent.setText(current.getContent());
-            holder.ivPic.setImageResource(current.getPic());
+            //holder.ivPic.setImageResource(current.getPic());
+            int numberOfLikes = current.getLikes();
+            holder.tvLikes.setText(String.valueOf(numberOfLikes));
         }
-
     }
 
     @Override
@@ -74,4 +105,5 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
     public List<Post> getPosts() {
         return posts;
     }
+
 }

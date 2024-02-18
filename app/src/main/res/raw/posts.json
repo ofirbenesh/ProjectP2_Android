@@ -5,7 +5,7 @@
       "author": "John Doe",
       "content": "I made a cake",
       "date": "Today",
-      "pic": "R.drawable.cake",
+      "pic": "R.drawable/cake",
       "likes": 15,
       "comments": [
         {

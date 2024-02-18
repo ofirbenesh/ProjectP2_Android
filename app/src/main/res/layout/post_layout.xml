@@ -46,15 +46,17 @@
 
     </LinearLayout>
 
-    <EditText
+    <TextView
         android:id="@+id/postsText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topPage">
+        app:layout_constraintTop_toBottomOf="@+id/topPage"
+        android:textSize="24dp"
+        android:text="description...">
 
-    </EditText>
+    </TextView>
 
     <ImageView
         android:id="@+id/postsImage"
@@ -75,6 +77,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <TextView
+            android:id="@+id/num_of_likes"
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="2"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"
+            android:textColor="#3F51B5">
+
+        </TextView>
         <ImageButton
             android:id="@+id/likeButton"
             android:layout_width="wrap_content"
