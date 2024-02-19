@@ -14,27 +14,28 @@ import java.util.Date;
 public class Post {
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     private String author;
     private String content;
     private int likes;
-    //private int pic;
-    //private Uri picUri;
+    private int pic;
+    private Uri picUri;
 
 
     // a way to present picture
-    public Post(String author, String content, Uri pic, int likes) {
+    public Post(int id, String author, String content, Uri pic, int likes) {
+        this.id = id;
         this.author = author;
         this.content = content;
-        //this.pic = -1;
-        //this.picUri = pic;
+        this.pic = -1;
+        this.picUri = pic;
         this.likes = likes;
     }
-    public Post(String author, String content, int pic, int likes) {
+    public Post(int id, String author, String content, int pic, int likes) {
+        this.id = id;
         this.author = author;
         this.content = content;
-        //this.pic = pic;
-        //this.picUri = null;
+        this.pic = pic;
+        this.picUri = null;
         this.likes = likes;
     }
 
@@ -65,18 +66,22 @@ public class Post {
     public int getLikes() {
         return this.likes;
     }
-//
-//    public void addLikes(int likes) {
-//        this.likes = likes++;
-//    }
 
-//    public int getPic() {
-//        return pic;
-//    }
-//
-//    public void setPic(int pic) {
-//        this.pic = pic;
-//    }
+    public void setLikes(int i) {
+        this.likes = i;
+    }
+
+    public void incrementLikes() {
+        this.likes += 1;
+    }
+
+    public int getPic() {
+        return pic;
+    }
+
+    public void setPic(int pic) {
+        this.pic = pic;
+    }
 
 
 }

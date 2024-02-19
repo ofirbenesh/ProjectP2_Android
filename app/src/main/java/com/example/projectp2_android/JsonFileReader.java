@@ -2,6 +2,7 @@ package com.example.projectp2_android;
 
 import android.content.Context;
 
+import com.example.projectp2_android.entities.GlobalVariables;
 import com.example.projectp2_android.entities.Post;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,14 +37,20 @@ public class JsonFileReader {
             JSONObject jsonObject = new JSONObject(stringBuilder.toString());
             JSONArray jsonArray = jsonObject.getJSONArray("posts");
 
-            List<Post> allPosts = new ArrayList<>();
+            List<Post> allPosts = GlobalVariables.allPosts;
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonPost = jsonArray.getJSONObject(i);
                 int id = jsonPost.getInt("id");
                 String author = jsonPost.getString("author");
                 String content = jsonPost.getString("content");
+                String date = jsonPost.getString("date");
+                int likes = jsonPost.getInt("likes");
+                int picResourceId = R.drawable.cake;
+                Post post = new Post(id, author, content, picResourceId, likes);
+                allPosts.add(post);
             }
+
             // Use Gson to parse the JSON data into a List<Post>
 //            Type listType = new TypeToken<List<Post>>() {
 //            }.getType();
@@ -52,5 +59,6 @@ public class JsonFileReader {
             e.printStackTrace();
         }
     }
+
 }
 

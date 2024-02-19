@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.projectp2_android.adapters.PostsListAdapter;
 import com.example.projectp2_android.entities.Comment;
+import com.example.projectp2_android.entities.GlobalVariables;
 import com.example.projectp2_android.entities.Post;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -62,14 +63,16 @@ public class Feed extends AppCompatActivity {
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
 
 
-        posts = new ArrayList<>();
-        posts.add(new Post("jhon doe", "I made a cake", R.drawable.cake, 4));
-        posts.add(new Post("mike ross", "hello world", R.drawable.fac_bg, 13));
-        posts.add(new Post("Jenny dom", "beautiful", R.drawable.sunset, 21));
+//        posts = new ArrayList<>();
+//        posts.add(new Post(1,"jhon doe", "I made a cake", R.drawable.cake, 4));
+//        posts.add(new Post(2,"mike ross", "hello world", R.drawable.fac_bg, 13));
+//        posts.add(new Post(3,"Jenny dom", "beautiful", R.drawable.sunset, 21));
 
-        //List<Post> posts = new JsonFileReader().readPostsFromJson(this, "posts.json");
-        adapter.setPosts(posts);
+        JsonFileReader.readPostsFromJson(this);
+        adapter.setPosts(GlobalVariables.allPosts);
         //endregion
+
+        // adding new post
         inputText = findViewById(R.id.inputPost);
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,16 +83,16 @@ public class Feed extends AppCompatActivity {
                 if (posts == null) {
                     postID = 1;
                 } else {
-                    postID = posts.size() + 1;
+                    postID = GlobalVariables.allPosts.size() + 1;
                 }
                 long currentTimeMillis = System.currentTimeMillis();
                 Date date = new Date(currentTimeMillis);
                 String postText = Objects.requireNonNull(inputText.getText()).toString();
                 List<Comment> comments = new ArrayList<>();
                 // savedImageResource = getImageResourceFromImageView(inputPostImage);
-                Post post = new Post(userName, inputText.getText().toString(), R.drawable.cake, 0);
-                posts.add(post);
-                adapter.setPosts(posts);
+                Post post = new Post(postID, userName, postText, R.drawable.cake, 0);
+                GlobalVariables.allPosts.add(post);
+                adapter.setPosts(GlobalVariables.allPosts);
             }
         });
     }
