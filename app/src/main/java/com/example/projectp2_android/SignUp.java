@@ -1,13 +1,17 @@
 package com.example.projectp2_android;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,27 +74,47 @@ public class SignUp extends AppCompatActivity {
     }
 
         public void showFileChooser() {
-            Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-            i.setType("image/*");
-            i.addCategory(Intent.CATEGORY_OPENABLE);
+            final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
 
-            try {
-                startActivityForResult(Intent.createChooser(i, "select a picture"), 100);
-            } catch (Exception exception) {
-                Toast.makeText(this, "no file manager", Toast.LENGTH_SHORT).show();
-            }
+            AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this);
+            builder.setTitle("Add Photo!");
+            builder.setItems(options, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int item) {
+                    if (options[item].equals("Take Photo")) {
+                        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(takePicture, 0);
+                    } else if (options[item].equals("Choose from Gallery")) {
+                        Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(pickPhoto , 1);
+                    } else if (options[item].equals("Cancel")) {
+                        dialog.dismiss();
+                    }
+                }
+            });
+            builder.show();
         }
 
         @Override protected void onActivityResult(int requestCode, int resultCode,
                                                   @Nullable @org.jetbrains.annotations.Nullable Intent data) {
 
-            if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
-                Uri selected_img = data.getData();
-
-                profilePictureUri = selected_img;
-                imageViewProfile.setImageURI(selected_img);
-            }
             super.onActivityResult(requestCode, resultCode, data);
+            if (resultCode == RESULT_OK) {
+                Uri selectedImageUri = null;
+                if (requestCode == 0) {
+                    // Camera
+                    Bundle extras = data.getExtras();
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+                    imageViewProfile.setImageBitmap(imageBitmap);
+                } else if (requestCode == 1) {
+                    // Gallery
+                    selectedImageUri = data.getData();
+                    imageViewProfile.setImageURI(selectedImageUri);
+                }
+
+                // Update profilePictureUri with the URI of the new image
+                profilePictureUri = selectedImageUri;
+            }
         }
 
         public User saveUser(EditText username, EditText password) {

@@ -1,0 +1,31 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "author": "John Doe",
+      "content": "I made a cake",
+      "date": "Today",
+      "pic": "R.drawable/cake",
+      "likes": 15,
+      "comments": 1
+    },
+    {
+      "id": "2",
+      "author": "Jane Smith",
+      "content": "my baby!",
+      "date": "Today",
+      "pic": "R.drawable/cake",
+      "likes": 7,
+      "comments": 3
+    },
+    {
+      "id": "3",
+      "author": "Ben Watson",
+      "content": "sunset",
+      "date": "Today",
+      "pic": "R.drawable/sunset",
+      "likes": 10,
+      "comments": 2
+    }
+  ]
+}
