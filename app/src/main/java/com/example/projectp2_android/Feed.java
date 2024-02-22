@@ -45,6 +45,7 @@ public class Feed extends AppCompatActivity {
     private EditText inputText;
     private boolean isDarkMode;
     private static PostsListAdapter adapter;
+    private boolean isPhotoAttached;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +79,6 @@ public class Feed extends AppCompatActivity {
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
 
-//        posts = new ArrayList<>();
-//        posts.add(new Post(1,"jhon doe", "I made a cake", R.drawable.cake, 4));
-//        posts.add(new Post(2,"mike ross", "hello world", R.drawable.fac_bg, 13));
-//        posts.add(new Post(3,"Jenny dom", "beautiful", R.drawable.sunset, 21));
-
         JsonFileReader.readPostsFromJson(this);
         adapter.setPosts(GlobalVariables.allPosts);
         //endregion
@@ -98,6 +94,15 @@ public class Feed extends AppCompatActivity {
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 }
+            }
+        });
+
+        // sign out from app
+        Button signOutBtn = findViewById(R.id.signOut_btn);
+        signOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -120,8 +125,6 @@ public class Feed extends AppCompatActivity {
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //inputPostImage = findViewById(R.id.inputImage);
-                //inputPostImage.setImageResource(R.drawable.like2);
                 int postID;
                 if (posts == null) {
                     postID = 1;
@@ -132,6 +135,9 @@ public class Feed extends AppCompatActivity {
                 String postText = Objects.requireNonNull(inputText.getText()).toString();
                 Post post = new Post(postID, userName, postText, postImgUri,
                         profilePictureUri, 0, date);
+                if (!isPhotoAttached) {
+                    post.setPic(R.drawable.blank);
+                }
                 GlobalVariables.allPosts.add(post);
                 adapter.setPosts(GlobalVariables.allPosts);
             }
@@ -159,6 +165,7 @@ public class Feed extends AppCompatActivity {
             newPostImage.setImageURI(selectedImageUri);
 
             postImgUri = selectedImageUri;
+            isPhotoAttached = true;
         }
     }
 

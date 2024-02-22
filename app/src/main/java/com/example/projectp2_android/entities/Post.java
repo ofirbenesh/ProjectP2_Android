@@ -146,5 +146,7 @@ public class Post {
         isLiked = liked;
     }
 
-
+    public void setPicUri(Uri picUri) {
+        this.picUri = picUri;
+    }
 }

@@ -99,7 +99,8 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:text="Upload Photo"
-        android:background="#AEAEAE"/>
+        android:background="#AEAEAE"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/btn_signup2"
@@ -107,5 +108,6 @@
         android:layout_height="50dp"
         android:background="@drawable/green_button"
         android:text="Sign up"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"/>
 </LinearLayout>

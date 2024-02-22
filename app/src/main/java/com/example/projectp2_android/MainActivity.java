@@ -53,17 +53,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        Button btn_move = findViewById(R.id.moveTofeed);
-        btn_move.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Feed.class);
-                User user = new User("Ofir Benesh", "Ofir1234");
-                GlobalVariables.userName = "Ofir Benesh";
-                i.putExtra("user",user);
-                startActivity(i);
-            }
-        });
 
     }
 }

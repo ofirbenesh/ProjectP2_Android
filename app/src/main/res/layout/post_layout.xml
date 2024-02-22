@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="30dp">
 
     <LinearLayout
         android:id="@+id/topPage"
@@ -75,6 +76,16 @@
         android:textColor="?attr/colorOnSurface">
 
     </TextView>
+
+    <ImageView
+        android:id="@+id/postsImage"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toTopOf="@+id/postsButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postsText" />
     <LinearLayout
         android:id="@+id/editPost"
         android:layout_width="300dp"
@@ -101,19 +112,6 @@
 
         </EditText>
     </LinearLayout>
-
-
-    <ImageView
-        android:id="@+id/postsImage"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="41dp"
-        app:layout_constraintBottom_toTopOf="@+id/postsButtons"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postsText"
-        app:layout_constraintVertical_bias="0.488" />
 
     <LinearLayout
         android:id="@+id/postsButtons"
@@ -146,15 +144,15 @@
 
         </TextView>
 
+
         <ImageButton
             android:id="@+id/commentButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            app:srcCompat="@drawable/btn_comment"
-            android:scaleType="fitCenter"/>
-
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/btn_comment" />
 
         <ImageButton
             android:id="@+id/shareButton"
