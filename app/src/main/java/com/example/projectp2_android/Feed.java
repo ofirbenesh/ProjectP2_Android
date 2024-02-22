@@ -44,6 +44,7 @@ public class Feed extends AppCompatActivity {
     private List<Post> posts;
     private EditText inputText;
     private boolean isDarkMode;
+    private static PostsListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,8 @@ public class Feed extends AppCompatActivity {
 
         //region recyclerView
         RecyclerView lstPosts = findViewById(R.id.lstPosts);
-        final PostsListAdapter adapter = new PostsListAdapter(this);
+        final PostsListAdapter adapterOnCreate = new PostsListAdapter(this);
+        adapter = adapterOnCreate;
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
 
@@ -143,13 +145,6 @@ public class Feed extends AppCompatActivity {
         return (tag instanceof Integer) ? (int) tag : -1; // Returns -1 if no resource ID is found
     }
 
-    // TODO delete if not needed
-    public void commentOnClick(Post currentPost) {
-        Intent intent = new Intent(Feed.this, CommentsActivity.class);
-        intent.putExtra("POST_ID", currentPost.getId());
-        intent.putExtra("userName", userName);
-        startActivity(intent);
-    }
 
     public void choosePhotoFromGallery() {
         Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -166,6 +161,5 @@ public class Feed extends AppCompatActivity {
             postImgUri = selectedImageUri;
         }
     }
-
 
 }

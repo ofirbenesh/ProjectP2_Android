@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,7 +41,9 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
         private final ImageButton shareButton;
         private final ImageButton commentButton;
         private final ImageButton editPostButton;
-        private LinearLayout popupLayout;
+        private final ImageButton deletePostButton;
+        private LinearLayout popupLayoutShare;
+        private LinearLayout popupLayoutEdit;
         private View overlay;
 
         public PostViewHolder(View itemView) {
@@ -54,19 +57,20 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
             this.likeButton = itemView.findViewById(R.id.likeButton);
             this.shareButton = itemView.findViewById(R.id.shareButton);
             this.commentButton = itemView.findViewById(R.id.commentButton);
-            this.popupLayout = itemView.findViewById(R.id.shareApps);
+            this.popupLayoutShare = itemView.findViewById(R.id.shareApps);
+            this.popupLayoutEdit = itemView.findViewById(R.id.editPost);
             this.overlay = itemView.findViewById(R.id.overlay);
             this.editPostButton = itemView.findViewById(R.id.editButton);
-
+            this.deletePostButton = itemView.findViewById(R.id.deleteButton);
         }
 
         //region for pop up share button
-        public void togglePopup() {
-            if (popupLayout.getVisibility() == View.VISIBLE) {
-                popupLayout.setVisibility(View.GONE);
+        public void togglePopup(LinearLayout layout) {
+            if (layout.getVisibility() == View.VISIBLE) {
+                layout.setVisibility(View.GONE);
                 overlay.setVisibility(View.GONE);
             } else {
-                popupLayout.setVisibility(View.VISIBLE);
+                layout.setVisibility(View.VISIBLE);
                 overlay.setVisibility(View.VISIBLE);
             }
         }
@@ -153,25 +157,57 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
                 holder.editPostButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // Implement your edit logic here
-                        // This could involve starting a new Activity or showing a Dialog to edit the post
+                        int adapterPosition = holder.getAdapterPosition(); // Use a different variable name if necessary
+                        if (adapterPosition != RecyclerView.NO_POSITION) {
+                            Post currentPost = posts.get(adapterPosition);
+                            holder.togglePopup(holder.popupLayoutEdit);
+                            EditText newContent = holder.itemView.findViewById(R.id.editTextPost);
+
+                            ImageButton publishBtn = holder.itemView.findViewById(R.id.publishEdit);
+                            publishBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    current.setContent(newContent.getText().toString());
+                                    holder.tvContent.setText(newContent.getText().toString());
+                                }
+                            });
                     }
+                }
                 });
             } else {
                 holder.editPostButton.setVisibility(View.GONE);
             }
+
+            // delete post button clicked
+            if (current.getAuthor().equals(GlobalVariables.userName)) {
+                holder.deletePostButton.setVisibility(View.VISIBLE);
+                holder.deletePostButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int adapterPosition = holder.getAdapterPosition(); // Use a different variable name if necessary
+                        if (adapterPosition != RecyclerView.NO_POSITION) {
+                            Post currentPost = posts.get(adapterPosition);
+                            GlobalVariables.allPosts.remove(currentPost);
+                            setPosts(GlobalVariables.allPosts);
+                        }
+                    }
+                });
+            } else {
+                holder.deletePostButton.setVisibility(View.GONE);
+            }
+
             // share button onclick
             holder.shareButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    holder.togglePopup();
+                    holder.togglePopup(holder.popupLayoutShare);
                 }
             });
             // after share button is open click on background will close it
             holder.overlay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    holder.togglePopup();
+                    holder.togglePopup(holder.popupLayoutShare);
                 }
             });
 
@@ -204,5 +240,7 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
     public List<Post> getPosts() {
         return posts;
     }
+
+
 
 }

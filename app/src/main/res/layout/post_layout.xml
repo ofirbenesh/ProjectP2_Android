@@ -53,7 +53,14 @@
             android:scaleType="fitCenter">
 
         </ImageButton>
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/btn_delete"
+            android:scaleType="fitCenter">
 
+        </ImageButton>
     </LinearLayout>
 
     <TextView
@@ -68,6 +75,33 @@
         android:textColor="?attr/colorOnSurface">
 
     </TextView>
+    <LinearLayout
+        android:id="@+id/editPost"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/postsButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/publishEdit"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/btn_edit"
+            android:scaleType="fitCenter">
+        </ImageButton>
+
+        <EditText
+            android:id="@+id/editTextPost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="edit here">
+
+        </EditText>
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/postsImage"
