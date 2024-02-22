@@ -5,4 +5,5 @@ import java.util.List;
 
 public class GlobalVariables {
     public static List<Post> allPosts = new ArrayList<>();
+    public static String userName;
 }

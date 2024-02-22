@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.projectp2_android.entities.GlobalVariables;
 import com.example.projectp2_android.entities.Post;
+import com.example.projectp2_android.Feed;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -46,18 +47,20 @@ public class JsonFileReader {
                 String content = jsonPost.getString("content");
                 String date = jsonPost.getString("date");
                 int likes = jsonPost.getInt("likes");
-                int picResourceId = R.drawable.cake;
-                Post post = new Post(id, author, content, picResourceId, likes);
+                int picResourceId = getResourceID(context,jsonPost.getString("pic"));
+                int profilePicResourceId = getResourceID(context,jsonPost.getString("userPic"));
+                Post post = new Post(id, author, content, picResourceId,
+                        profilePicResourceId, likes, date);
                 allPosts.add(post);
             }
 
-            // Use Gson to parse the JSON data into a List<Post>
-//            Type listType = new TypeToken<List<Post>>() {
-//            }.getType();
-//            return new Gson().fromJson(json, listType);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
+    }
+     //function to convert img to ID resource
+    public static int getResourceID(Context context, String resourceName) {
+        return context.getResources().getIdentifier(resourceName, "drawable", context.getPackageName());
     }
 
 }

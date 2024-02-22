@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="30dp">
 
     <LinearLayout
         android:id="@+id/topPage"
@@ -15,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profilePic"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -34,16 +35,33 @@
                 android:layout_height="wrap_content"
                 android:text="User Name"
                 android:textSize="24dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"/>
 
             <TextView
                 android:id="@+id/postsDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Date"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColor="?attr/colorOnSurface"/>
         </LinearLayout>
+        <ImageButton
+            android:id="@+id/editButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/btn_edit"
+            android:scaleType="fitCenter">
 
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/btn_delete"
+            android:scaleType="fitCenter">
+
+        </ImageButton>
     </LinearLayout>
 
     <TextView
@@ -54,19 +72,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topPage"
         android:textSize="24dp"
-        android:text="description...">
+        android:text="description..."
+        android:textColor="?attr/colorOnSurface">
 
     </TextView>
 
     <ImageView
         android:id="@+id/postsImage"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="41dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toTopOf="@+id/postsButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postsText" />
+    <LinearLayout
+        android:id="@+id/editPost"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/postsButtons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postsText" />
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/publishEdit"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/btn_edit"
+            android:scaleType="fitCenter">
+        </ImageButton>
+
+        <EditText
+            android:id="@+id/editTextPost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="edit here">
+
+        </EditText>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/postsButtons"
@@ -75,28 +120,30 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white">
 
-        <TextView
-            android:id="@+id/num_of_likes"
-            android:layout_width="5dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="2"
-            android:textSize="24dp"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"
-            android:textColor="#3F51B5">
-
-        </TextView>
         <ImageButton
             android:id="@+id/likeButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            app:srcCompat="@drawable/small_like"
+            app:srcCompat="@drawable/btn_like"
             android:scaleType="fitCenter"/>
+        <TextView
+            android:id="@+id/num_of_likes"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="00"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"
+            android:textColor="#3F51B5">
+
+        </TextView>
+
 
         <ImageButton
             android:id="@+id/commentButton"
@@ -104,9 +151,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            app:srcCompat="@drawable/comment_btn"
-            android:scaleType="fitCenter"/>
-
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/btn_comment" />
 
         <ImageButton
             android:id="@+id/shareButton"
@@ -114,8 +160,46 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            app:srcCompat="@drawable/share_btn"
+            app:srcCompat="@drawable/btn_share"
             android:scaleType="fitCenter"/>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/shareApps"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/postsButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/facebook_icon" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/instagram_icon" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/whatsapp_icon" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
