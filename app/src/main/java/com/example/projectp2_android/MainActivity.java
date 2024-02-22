@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.projectp2_android.entities.GlobalVariables;
+
 public class MainActivity extends AppCompatActivity {
     private EditText user_name;
     private EditText password;
@@ -50,6 +52,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+        });
+        Button btn_move = findViewById(R.id.moveTofeed);
+        btn_move.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, Feed.class);
+                User user = new User("Ofir Benesh", "Ofir1234");
+                GlobalVariables.userName = "Ofir Benesh";
+                i.putExtra("user",user);
+                startActivity(i);
+            }
         });
 
     }

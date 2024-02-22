@@ -75,6 +75,12 @@
             android:backgroundTint="@color/green"
             android:textColor="@color/white"
             android:textAllCaps="false"/>
+        <Button
+            android:id="@+id/moveTofeed"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="myButton"></Button>
+
     </LinearLayout>
 
 </RelativeLayout>

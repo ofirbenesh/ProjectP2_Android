@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectp2_android.entities.GlobalVariables;
+
 import java.io.File;
 
 public class SignUp extends AppCompatActivity {
@@ -54,6 +56,7 @@ public class SignUp extends AppCompatActivity {
                     if (profilePictureUri != null) {
                         intent.putExtra("img",profilePictureUri);
                     }
+                    GlobalVariables.userName = username.getText().toString();
                     startActivity(intent);
                 } else {
                     // Display error message if form is invalid

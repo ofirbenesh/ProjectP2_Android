@@ -9,30 +9,22 @@ import java.util.Date;
 
 public class Comment implements Parcelable {
 
-    private final String commentId;
-    private final Date date;
-    private final User user;
+    private int commentId;
+    private String author;
     private String text;
-    private int likes;
 
-    public Comment(String commentId, Date date, User user, String text, int likes) {
+    public Comment(int commentId, String author, String text) {
         this.commentId = commentId;
-        this.date = date;
-        this.user = user;
+        this.author = author;
         this.text = text;
-        this.likes = likes;
     }
 
-    public String getCommentId() {
+    public int getCommentId() {
         return commentId;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public User getUser() {
-        return user;
+    public String getAuthor() {
+        return author;
     }
 
     public String getText() {
@@ -43,14 +35,6 @@ public class Comment implements Parcelable {
         this.text = text;
     }
 
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
-
     // Parcelable implementation
     @Override
     public int describeContents() {
@@ -59,19 +43,15 @@ public class Comment implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(commentId);
-        dest.writeSerializable(date);
-        dest.writeParcelable((Parcelable) user, flags);
+        dest.writeInt(commentId);
+        dest.writeString(author);
         dest.writeString(text);
-        dest.writeInt(likes);
     }
 
     protected Comment(Parcel in) {
-        commentId = in.readString();
-        date = (Date) in.readSerializable();
-        user = in.readParcelable(User.class.getClassLoader());
+        commentId = in.readInt();
+        author = in.readString();
         text = in.readString();
-        likes = in.readInt();
     }
 
     public static final Creator<Comment> CREATOR = new Creator<Comment>() {

@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#3b5998">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="200dp"
         android:layout_height="80dp"
         app:srcCompat="@drawable/foobook2"
-        app:tint="@android:color/white"
+        app:tint="#3b5998"
         android:gravity="start"/>
 
+    <Switch
+        android:id="@+id/darkModeBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Dark Mode"
+        android:textColor="?attr/colorOnSurface"/>
+
     <LinearLayout
+        android:id="@+id/newPost"
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:orientation="horizontal"
-        android:background="@color/white">
+        >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImageView"
@@ -40,7 +53,8 @@
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
             android:text=""
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            android:textColor="?attr/colorOnSurface"/>
 
         <EditText
             android:id="@+id/inputPost"
@@ -49,17 +63,23 @@
             android:hint="what's on your mind?"/>
 
     </LinearLayout>
+        <ImageView
+            android:id="@+id/ImgPost"
+            android:layout_width="100dp"
+            android:layout_height="100dp">
+
+        </ImageView>
 
     </LinearLayout>
 
     <LinearLayout
-
-        android:layout_width="351dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="1dp">
+        tools:layout_editor_absoluteX="1dp"
+        android:background="#3b5998">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/biggerText"
@@ -101,12 +121,13 @@
             app:icon="@drawable/post_icon"
             app:iconSize="56dp"
             app:iconTint="@color/black" />
+
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/posts"
         android:layout_width="409dp"
-        android:layout_height="425dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -123,9 +144,22 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lstPosts"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/darker_gray" />
+                android:layout_height="match_parent" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="1100px"
+            android:layout_height="295px"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/posts"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/menu_facebook">
+
+        </ImageView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
 </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

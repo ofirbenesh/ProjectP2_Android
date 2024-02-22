@@ -5,7 +5,8 @@
       "author": "John Doe",
       "content": "I made a cake",
       "date": "Today",
-      "pic": "R.drawable/cake",
+      "pic": "cake",
+      "userPic": "profilepic1",
       "likes": 15,
       "comments": 1
     },
@@ -13,8 +14,9 @@
       "id": "2",
       "author": "Jane Smith",
       "content": "my baby!",
-      "date": "Today",
-      "pic": "R.drawable/cake",
+      "date": "Sunday",
+      "pic": "dog",
+      "userPic": "profilepic2",
       "likes": 7,
       "comments": 3
     },
@@ -22,10 +24,81 @@
       "id": "3",
       "author": "Ben Watson",
       "content": "sunset",
-      "date": "Today",
-      "pic": "R.drawable/sunset",
+      "date": "Yesterday",
+      "pic": "sunset",
+      "userPic": "profilepic3",
       "likes": 10,
       "comments": 2
+    },
+    {
+      "id": "4",
+      "author": "Alice Johnson",
+      "content": "Look at this beautiful flower",
+      "date": "Monday",
+      "pic": "flower",
+      "userPic": "profilepic4",
+      "likes": 5,
+      "comments": 0
+    },
+    {
+      "id": "5",
+      "author": "Mike Brown",
+      "content": "Best vacation ever!",
+      "date": "Last Week",
+      "pic": "beach",
+      "userPic": "profilepic5",
+      "likes": 22,
+      "comments": 5
+    },
+    {
+      "id": "6",
+      "author": "Emma Wilson",
+      "content": "Yummy dinner :)",
+      "date": "Saturday",
+      "pic": "dinner",
+      "userPic": "profilepic6",
+      "likes": 17,
+      "comments": 4
+    },
+    {
+      "id": "7",
+      "author": "Oliver Jones",
+      "content": "Chilling at home",
+      "date": "Friday",
+      "pic": "home",
+      "userPic": "profilepic7",
+      "likes": 9,
+      "comments": 1
+    },
+    {
+      "id": "8",
+      "author": "Isabella Taylor",
+      "content": "New book arrived!",
+      "date": "Thursday",
+      "pic": "book",
+      "userPic": "profilepic8",
+      "likes": 12,
+      "comments": 3
+    },
+    {
+      "id": "9",
+      "author": "Ethan Davis",
+      "content": "Can't get enough of this game",
+      "date": "Wednesday",
+      "pic": "game",
+      "userPic": "profilepic9",
+      "likes": 20,
+      "comments": 6
+    },
+    {
+      "id": "10",
+      "author": "Sophia Miller",
+      "content": "Beautiful night sky",
+      "date": "Tuesday",
+      "pic": "nightsky",
+      "userPic": "profilepic10",
+      "likes": 30,
+      "comments": 8
     }
   ]
 }
