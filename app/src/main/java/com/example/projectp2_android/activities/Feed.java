@@ -1,9 +1,10 @@
-package com.example.projectp2_android;
+package com.example.projectp2_android.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,10 +25,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.projectp2_android.JsonFileReader;
+import com.example.projectp2_android.LocalDatabase;
+import com.example.projectp2_android.R;
+import com.example.projectp2_android.User;
 import com.example.projectp2_android.adapters.PostsListAdapter;
 import com.example.projectp2_android.entities.Comment;
 import com.example.projectp2_android.entities.GlobalVariables;
 import com.example.projectp2_android.entities.Post;
+import com.example.projectp2_android.viewmodels.PostsViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
@@ -43,18 +49,18 @@ public class Feed extends AppCompatActivity {
     private Uri postImgUri;
     private List<Post> posts;
     private EditText inputText;
-    private boolean isDarkMode;
     private static PostsListAdapter adapter;
     private boolean isPhotoAttached;
+    private PostsViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // pass context to local DB class
+        LocalDatabase.init(this);
         setContentView(R.layout.activity_feed);
 
-        this.isDarkMode = false;
-
-        // transffer the user information to feed inorder to show the details.
+        // transfer the user information to feed inorder to show the details.
         Intent intent = getIntent();
         User user = (User) intent.getSerializableExtra("user");
         profileImageView = findViewById(R.id.profileImageView);
@@ -79,8 +85,12 @@ public class Feed extends AppCompatActivity {
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
 
-        JsonFileReader.readPostsFromJson(this);
-        adapter.setPosts(GlobalVariables.allPosts);
+        viewModel = new ViewModelProvider(this).get(PostsViewModel.class);
+        viewModel.get().observe(this, posts -> {
+            adapter.setPosts(posts);
+        });
+//        JsonFileReader.readPostsFromJson(this);
+//        adapter.setPosts(GlobalVariables.allPosts);
         //endregion
 
         //dark mode
@@ -142,13 +152,6 @@ public class Feed extends AppCompatActivity {
                 adapter.setPosts(GlobalVariables.allPosts);
             }
         });
-    }
-
-    // Method to retrieve the resource ID
-    // TODO delete if not needed
-    public int getImageResourceFromImageView(ImageView imageView) {
-        Object tag = imageView.getTag();
-        return (tag instanceof Integer) ? (int) tag : -1; // Returns -1 if no resource ID is found
     }
 
 

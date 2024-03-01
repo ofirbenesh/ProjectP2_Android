@@ -35,7 +35,6 @@
             android:inputType="textPassword"
             android:padding="8dp"/>
 
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
@@ -56,6 +55,7 @@
             android:textColor="#0523A5"
             android:textAllCaps="false">
         </TextView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,6 +75,15 @@
             android:backgroundTint="@color/green"
             android:textColor="@color/white"
             android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/moveBtn"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="Ben"
+            android:backgroundTint="#009688">
+
+        </Button>
 
     </LinearLayout>
 

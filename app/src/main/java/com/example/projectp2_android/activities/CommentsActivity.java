@@ -1,4 +1,4 @@
-package com.example.projectp2_android;
+package com.example.projectp2_android.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.projectp2_android.R;
 import com.example.projectp2_android.adapters.CommentListAdapter;
 import com.example.projectp2_android.adapters.PostsListAdapter;
 import com.example.projectp2_android.entities.Comment;

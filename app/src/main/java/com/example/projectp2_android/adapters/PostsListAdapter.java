@@ -2,27 +2,20 @@ package com.example.projectp2_android.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projectp2_android.CommentsActivity;
-import com.example.projectp2_android.Feed;
+import com.example.projectp2_android.activities.CommentsActivity;
 import com.example.projectp2_android.entities.GlobalVariables;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import com.example.projectp2_android.entities.Post;
 import com.example.projectp2_android.R;
@@ -122,7 +115,6 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
             holder.likeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO add boolean variable to know if liked already been clicked
                     int currentPosition = holder.getAdapterPosition();
                     if (currentPosition != RecyclerView.NO_POSITION) {
                         Post currentPost = posts.get(currentPosition);

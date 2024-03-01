@@ -1,17 +1,11 @@
 package com.example.projectp2_android.entities;
 
 import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.projectp2_android.CommentsActivity;
-import com.example.projectp2_android.User;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity

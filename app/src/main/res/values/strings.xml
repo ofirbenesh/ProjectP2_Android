@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProjectP2_Android</string>
+    <string name="serverUrl">http://10.0.2.2:5000/</string>
+    <string name="serverPort">5000</string>
 </resources>
