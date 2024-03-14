@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class CommentsActivity extends AppCompatActivity {
+    private List<Comment> listOfComments;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +34,14 @@ public class CommentsActivity extends AppCompatActivity {
         lstComments.setAdapter(adapter);
         lstComments.setLayoutManager(new LinearLayoutManager(this));
 
+        // Temp comments list
+        listOfComments = new ArrayList<>();
+
         // Fetch comments based on the Post ID passed from the previous Activity
         int postId = getIntent().getIntExtra("POST_ID", -1);
         String commentsAuthor = GlobalVariables.userName;
         Post currPost = GlobalVariables.allPosts.get(postId);
-        adapter.setComments(currPost.getAllComments());
+        adapter.setComments(listOfComments);
 
         // Add new comment
         Button postCommentBtn = findViewById(R.id.submitComment);
@@ -50,8 +54,10 @@ public class CommentsActivity extends AppCompatActivity {
                 List<Comment> comments = new ArrayList<>();
                 //int profile_pic = getImageResourceFromImageView(profileImageView);
                 Comment comment = new Comment(1, commentsAuthor, commentText);
-                currPost.addComment(comment);
-                adapter.setComments(currPost.getAllComments());
+//                currPost.addComment(comment);
+//                adapter.setComments(currPost.getAllComments());
+                listOfComments.add(comment);
+                adapter.setComments(listOfComments);
             }
         });
 

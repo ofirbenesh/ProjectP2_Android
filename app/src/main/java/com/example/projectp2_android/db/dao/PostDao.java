@@ -1,4 +1,4 @@
-package com.example.projectp2_android;
+package com.example.projectp2_android.db.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

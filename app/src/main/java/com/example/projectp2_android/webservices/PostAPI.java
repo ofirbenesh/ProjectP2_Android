@@ -1,11 +1,15 @@
 package com.example.projectp2_android.webservices;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.projectp2_android.CallBack;
 import com.example.projectp2_android.MyApplication;
-import com.example.projectp2_android.PostDao;
+import com.example.projectp2_android.db.dao.PostDao;
 import com.example.projectp2_android.R;
 import com.example.projectp2_android.entities.Post;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 import retrofit2.Call;
@@ -19,6 +23,8 @@ public class PostAPI {
     private PostDao dao;
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
+    CallBack callback;
+
     public PostAPI(MutableLiveData<List<Post>> postListData, PostDao dao) {
         this.postListData = postListData;
         this.dao = dao;
@@ -29,21 +35,56 @@ public class PostAPI {
                 .addConverterFactory(GsonConverterFactory.create()).build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
         }
-    public void get() {
-        Call<List<Post>> call = webServiceAPI.getPosts();
+    public void setCallback(CallBack callback) {
+        this.callback = callback;
+    }
+    public void get(MutableLiveData<List<Post>> posts) {
+
+        String authToken = "Bearer " + MyApplication.loggerUserToken;
+        Call<List<Post>> call = webServiceAPI.getPosts(authToken);
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-
-                new Thread(() -> {
-                    //dao.clear();
-                    //dao.insertList(response.body());
-                    //TODO check if get or index
-                    //postListData.postValue(dao.get());
-                }).start();
+                postListData.postValue(response.body());
+//                new Thread(() -> {
+////                    dao.insert(posts);
+//                    postListData.postValue(dao.index());
+//                }).start();
             }
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {}
+        });
+    }
+
+    public void addPost(Post post) {
+        JsonObject postBody = new JsonObject();
+        postBody.addProperty("userID", post.getUserID());
+        postBody.addProperty("content", post.getContent());
+        postBody.addProperty("photo", post.getPhoto());
+        postBody.addProperty("author", post.getAuthor());
+
+        String authToken = "Bearer " + MyApplication.loggerUserToken;
+
+        Call<Post> call = webServiceAPI.createPost(authToken, postBody);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (response.isSuccessful()) {
+                    // Optionally update your local database or LiveData here
+                    Log.d("AddPost", "Post added successfully");
+                    callback.onSuccess("Post added successfully");
+
+                } else {
+                    Log.d("AddPost", "Failed to add post");
+                    callback.onFail();
+                }
+        }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                Log.d("AddPost", "Error adding post: " + t.getMessage());
+                callback.onFail();
+            }
         });
     }
 

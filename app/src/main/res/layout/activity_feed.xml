@@ -21,7 +21,7 @@
         android:id="@+id/imageView"
         android:layout_width="200dp"
         android:layout_height="80dp"
-        app:srcCompat="@drawable/foobook2"
+        app:srcCompat="@drawable/facebook_logo"
         app:tint="#3b5998"
         android:gravity="start"/>
 
@@ -162,17 +162,45 @@
                 android:layout_height="match_parent" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <ImageView
-            android:id="@+id/menu"
-            android:layout_width="1100px"
-            android:layout_height="295px"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
             android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="@id/posts"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/menu_facebook">
+            app:layout_constraintBottom_toBottomOf="@id/posts">
 
-        </ImageView>
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/menu_feed"/>
+
+            <ImageButton
+                android:id="@+id/friendsBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/menu_friends__1_"/>
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/menu_videos"/>
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/menu_opt"/>
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

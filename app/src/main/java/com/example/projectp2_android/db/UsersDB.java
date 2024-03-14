@@ -1,4 +1,4 @@
-package com.example.projectp2_android;
+package com.example.projectp2_android.db;
 
 import android.content.Context;
 
@@ -6,19 +6,22 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.projectp2_android.db.dao.PostDao;
+import com.example.projectp2_android.db.dao.UserDao;
 import com.example.projectp2_android.entities.Post;
+import com.example.projectp2_android.entities.User;
 
-@Database(entities = {Post.class}, version = 1)
-public abstract class LocalDatabase extends RoomDatabase {
-    public abstract PostDao postDao();
-    private static volatile LocalDatabase INSTANCE;
+@Database(entities = {User.class}, version = 1)
+public abstract class UsersDB extends RoomDatabase {
+    public abstract UserDao userDao();
+    private static volatile UsersDB INSTANCE;
 
     public static void init(Context context) {
         if (INSTANCE == null) {
-            synchronized (LocalDatabase.class) {
+            synchronized (UsersDB.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    LocalDatabase.class, "local_database")
+                                    UsersDB.class, "users_database")
                             .fallbackToDestructiveMigration()
                             .build();
                 }
@@ -26,7 +29,7 @@ public abstract class LocalDatabase extends RoomDatabase {
         }
     }
 
-    public static LocalDatabase getInstance() {
+    public static UsersDB getInstance() {
         if (INSTANCE == null) {
             throw new IllegalStateException("Database has not been initialized.");
         }

@@ -2,9 +2,11 @@ package com.example.projectp2_android.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectp2_android.MyApplication;
 import com.example.projectp2_android.activities.CommentsActivity;
 import com.example.projectp2_android.entities.GlobalVariables;
 
@@ -35,6 +38,7 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
         private final ImageButton commentButton;
         private final ImageButton editPostButton;
         private final ImageButton deletePostButton;
+        private final Button addFriendButton;
         private LinearLayout popupLayoutShare;
         private LinearLayout popupLayoutEdit;
         private View overlay;
@@ -55,6 +59,7 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
             this.overlay = itemView.findViewById(R.id.overlay);
             this.editPostButton = itemView.findViewById(R.id.editButton);
             this.deletePostButton = itemView.findViewById(R.id.deleteButton);
+            this.addFriendButton = itemView.findViewById(R.id.AddFriendBtn);
         }
 
         //region for pop up share button
@@ -92,21 +97,15 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
             final Post current = posts.get(position);
             holder.tvAuthor.setText(current.getAuthor());
             holder.tvContent.setText(current.getContent());
-            holder.tvDate.setText(current.getDate());
 
-            // to check if Uri was sent as img
-            if (current.getPic() != -1) {
-                holder.ivPic.setImageResource(current.getPic());
+            String PostPicBase64 = current.getPhoto();
+            if (PostPicBase64 != null && !PostPicBase64.equals("")) {
+                Bitmap profileBitmap = MyApplication.decodeBase64ToBitmap(PostPicBase64);
+                holder.ivPic.setImageBitmap(profileBitmap);
             }
-            else {
-                holder.ivPic.setImageURI(current.getPicUri());
-            }
-            if (current.getProfilePic() != -1) {
-                holder.ivProfilePic.setImageResource(current.getProfilePic());
-            }
-            else {
-                holder.ivProfilePic.setImageURI(current.getProfilePicUri());
-            }
+
+            // TODO take care of time
+//            holder.tvDate.setText(current.getDate());
 
             int numberOfLikes = current.getLikes();
             holder.tvLikes.setText(String.valueOf(numberOfLikes));
@@ -125,11 +124,11 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
                             int likes = currentPost.getLikes();
                             if (isLiked) {
                                 // If the post is liked, remove the like
-                                currentPost.setLikes(Math.max(likes - 1,0));
+                                currentPost.removeLike();
                                 holder.likeButton.setImageResource(R.drawable.btn_like_blue);
                             } else {
                                 // If the post is unliked, add like
-                                currentPost.setLikes(likes + 1);
+                                currentPost.addLike();
                                 holder.likeButton.setImageResource(R.drawable.btn_like);
                             }
                             currentPost.setLiked(!isLiked);
@@ -171,7 +170,7 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
             }
 
             // delete post button clicked
-            if (current.getAuthor().equals(GlobalVariables.userName)) {
+            if (current.getAuthor().equals(MyApplication.loggedUser)) {
                 holder.deletePostButton.setVisibility(View.VISIBLE);
                 holder.deletePostButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -202,6 +201,14 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
                     holder.togglePopup(holder.popupLayoutShare);
                 }
             });
+
+            // add Friend onClick TODO
+//            if (current.getUserID().isFriendOf()) {
+//                holder.addFriendButton.setVisibility(View.VISIBLE);
+//            }
+//            else {
+//                holder.addFriendButton.setVisibility(View.GONE);
+//            }
 
             // move to comments page for a specific post
             holder.commentButton.setOnClickListener(v -> {

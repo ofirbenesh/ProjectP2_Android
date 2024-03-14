@@ -10,58 +10,43 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.projectp2_android.MyApplication;
 import com.example.projectp2_android.R;
 import com.example.projectp2_android.SignUpValidator;
-import com.example.projectp2_android.User;
+import com.example.projectp2_android.entities.User;
 import com.example.projectp2_android.entities.GlobalVariables;
+import com.example.projectp2_android.viewmodels.SignUpViewModel;
+import com.example.projectp2_android.viewmodels.UserViewModel;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class SignUp extends AppCompatActivity {
 
-    private EditText fullname;
-    private EditText username;
-    private EditText password;
-    private EditText confpassword;
+    private EditText fullnameET;
+    private EditText usernameET;
+    private EditText emailET;
+    private EditText passwordET;
+    private EditText confpasswordET;
     private ImageView imageViewProfile;
     private Uri profilePictureUri;
+    private UserViewModel userViewModel;
+    private SignUpViewModel signupViewModel;
+    private boolean isSignupSuccessful;
+    private String imageBase64;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        // Initialize EditText fields
-        fullname = findViewById(R.id.fullname);
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
-        confpassword = findViewById(R.id.confpassword);
-
-        Button signUpButton = findViewById(R.id.btn_signup2);
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (SignUpValidator.isValidSignUpForm(fullname,
-                        username, password, confpassword)) {
-                    // Proceed with sign-up
-                    Toast.makeText(SignUp.this, "Sign up successful!", Toast.LENGTH_SHORT).show();
-                    User currUser = saveUser(username, password);
-                    Intent intent = new Intent(SignUp.this, MainActivity.class);
-                    intent.putExtra("user",currUser);
-                    if (profilePictureUri != null) {
-                        intent.putExtra("img",profilePictureUri);
-                    }
-                    GlobalVariables.userName = username.getText().toString();
-                    startActivity(intent);
-                } else {
-                    // Display error message if form is invalid
-                    Toast.makeText(SignUp.this, "All fields are required, password must match and contain at least 8 characters", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        init();
 
         Button buttonUploadPhoto = findViewById(R.id.buttonUploadPhoto);
         imageViewProfile = findViewById(R.id.imageViewProfile);
@@ -102,27 +87,79 @@ public class SignUp extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
             if (resultCode == RESULT_OK) {
                 Uri selectedImageUri = null;
+                Bitmap imageBitmap = null;
                 if (requestCode == 0) {
                     // Camera
                     Bundle extras = data.getExtras();
-                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+                    imageBitmap = (Bitmap) extras.get("data");
                     imageViewProfile.setImageBitmap(imageBitmap);
                 } else if (requestCode == 1) {
                     // Gallery
                     selectedImageUri = data.getData();
                     imageViewProfile.setImageURI(selectedImageUri);
+                    try {
+                        imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+                if (imageBitmap != null) {
+                    imageBase64 = MyApplication.bitmapToBase64(imageBitmap);
 
-                // Update profilePictureUri with the URI of the new image
-                profilePictureUri = selectedImageUri;
+                    // Update profilePictureUri with the URI of the new image
+                    profilePictureUri = selectedImageUri;
+                }
             }
         }
 
-        public User saveUser(EditText username, EditText password) {
-            User newUser = new User(username.getText().toString(),
-                    password.getText().toString());
-            return newUser;
+//        public User saveUser(EditText username, EditText password) {
+//            User newUser = new User(username.getText().toString(),
+//                    password.getText().toString());
+//            return newUser;
+//        }
+
+        private void init() {
+            fullnameET = findViewById(R.id.fullname);
+            usernameET = findViewById(R.id.username);
+            emailET = findViewById(R.id.email);
+            passwordET = findViewById(R.id.password);
+            confpasswordET = findViewById(R.id.confpassword);
+
+            // onclick to create the new account
+            Button signUpButton = findViewById(R.id.btn_signup2);
+            signUpButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    validateSignUp();
+                }
+            });
         }
+
+        private void validateSignUp() {
+            if (SignUpValidator.isValidSignUpForm(fullnameET,
+                    usernameET, passwordET, confpasswordET)) {
+                // Proceed with sign-up
+                Toast.makeText(SignUp.this, "Sign up successful!", Toast.LENGTH_SHORT).show();
+
+                this.userViewModel = new UserViewModel();
+
+                String username = usernameET.getText().toString();
+                String password = passwordET.getText().toString();
+                String email = emailET.getText().toString();
+                //String profileImageViewString = profilePictureUri.toString();
+                this.userViewModel.registerUser(email, username, password, imageBase64);
+                finish();
+            } else {
+                Toast.makeText(this, "Please Fill All Fields Correctly", Toast.LENGTH_SHORT).show();
+            }
+    }
+    private String bitmapToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
 
 
 }

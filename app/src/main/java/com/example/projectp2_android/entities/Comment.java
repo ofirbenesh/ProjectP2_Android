@@ -3,10 +3,6 @@ package com.example.projectp2_android.entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.projectp2_android.User;
-
-import java.util.Date;
-
 public class Comment implements Parcelable {
 
     private int commentId;

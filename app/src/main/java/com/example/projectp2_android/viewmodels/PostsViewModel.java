@@ -21,8 +21,8 @@ public class PostsViewModel extends ViewModel {
          }
 
          public LiveData<List<Post>> get() { return posts; }
-//
-//         public void add(Post post) { repository.add(post); }
+
+         public void add(Post post) { repository.add(post); }
 //
 //         public void delete(Post post) { repository.delete(post); }
 //
