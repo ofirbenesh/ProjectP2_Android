@@ -30,7 +30,6 @@ public class FriendsActivity extends AppCompatActivity {
 
         // get friends list from the server
         friendAPI.getFriends();
-        lstFriends = null;
 
     }
 }
