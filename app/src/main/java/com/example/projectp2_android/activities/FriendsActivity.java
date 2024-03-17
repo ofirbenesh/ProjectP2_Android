@@ -28,8 +28,9 @@ public class FriendsActivity extends AppCompatActivity {
         lstFriends.setAdapter(adapter);
         lstFriends.setLayoutManager(new LinearLayoutManager(this));
 
-        // get friends list from server
+        // get friends list from the server
         friendAPI.getFriends();
+        lstFriends = null;
 
     }
 }
