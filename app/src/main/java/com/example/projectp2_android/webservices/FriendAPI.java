@@ -97,7 +97,7 @@ public class FriendAPI {
                 if (response.isSuccessful()) {
 //                    MyApplication.activeUser.setFriendRequests(response.body());
                     friendRequestsListData.postValue(response.body());
-                    Log.d("friendRequest", "friend request sent");
+                    Log.d("friendRequestsList", "request list recived");
                     // update local db
                 }
             }
