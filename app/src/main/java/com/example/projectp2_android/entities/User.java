@@ -22,6 +22,11 @@ public class User implements Serializable {
     private String profilePhoto;
 
     @Ignore
+    private List<User> friends = new ArrayList<>();
+    @Ignore
+    private List<User> friendRequests = new ArrayList<>();
+
+    @Ignore
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -70,5 +75,19 @@ public class User implements Serializable {
     public String getProfilePic() { return profilePhoto; }
 
     public void setProfilePic(String profilePhoto) { this.profilePhoto = profilePhoto; }
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
+    }
+    public List<User> getFriendRequests() {
+        return friends;
+    }
+
+    public void setFriendRequests(List<User> friends) {
+        this.friends = friends;
+    }
 }
 

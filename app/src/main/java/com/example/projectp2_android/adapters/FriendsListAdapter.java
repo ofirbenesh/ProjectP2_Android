@@ -49,13 +49,18 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
         if (friends != null) {
             final User current = friends.get(position);
             holder.tvFriendName.setText(current.getFirstName());
-            holder.ivPic.setImageBitmap(MyApplication.decodeBase64ToBitmap(current.getProfilePhoto()));
+//            holder.ivPic.setImageBitmap(MyApplication.decodeBase64ToBitmap(current.getProfilePhoto()));
         }
     }
     @Override
     public int getItemCount() {
-        return 0;
+        if (friends != null) {
+            return friends.size();
+        } else {
+            return 0;
+        }
     }
+
     public void setFriends(List<User> c) {
         friends = c;
         notifyDataSetChanged();

@@ -21,10 +21,13 @@ public class UserRepository {
     private UserAPI userAPI;
     private FriendAPI friendAPI;
     private FriendsListData friendsListData;
+    private FriendsListData friendRequestListData;
 
     public UserRepository() {
         userAPI = new UserAPI();
-        friendAPI = new FriendAPI();
+        friendsListData = new FriendsListData();
+        friendRequestListData = new FriendsListData();
+        friendAPI = new FriendAPI(friendsListData, friendRequestListData);
     }
 
     public void getUser(String userId) {
@@ -49,10 +52,13 @@ public class UserRepository {
         protected void onActive() {
             super.onActive();
 
-            if (friendAPI == null) {
-                friendAPI = new FriendAPI();
+//            if (friendAPI == null) {
+//                friendAPI = new FriendAPI(this);
+//            }
+            if (friendAPI != null) {
+                friendAPI.getFriends();
+                friendAPI.getFriendRequests();
             }
-            friendAPI.getFriends();
 //            new Thread(() ->
 //            {
 //                // TODO check if dao.get
@@ -64,6 +70,15 @@ public class UserRepository {
     public LiveData<List<User>> getAll() {
         return friendsListData;
     }
+    public LiveData<List<User>> getFriendRequestsData() {
+        return friendRequestListData;
+    }
+
+    public void sendFriendRequest(String friendID) {
+        friendAPI.sendFriendRequest(friendID);
+    }
+
+    public void getFriendRequests() { friendAPI.getFriendRequests();}
 
 //    public void addFriend(final Post post) {
 //
