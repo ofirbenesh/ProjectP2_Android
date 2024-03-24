@@ -24,7 +24,8 @@ public class RetrofitBuilder {
                             .build();
 
                     retrofit = new Retrofit.Builder().
-                            baseUrl("http://10.0.2.2:3001/api/")
+                            // TODO before submit, change ip to emulator - 10.0.2.2
+                            baseUrl("http://10.100.102.103:3001/api/")
                             .client(okHttpClient)
                             .callbackExecutor(Executors.newSingleThreadExecutor())
                             .addConverterFactory(ScalarsConverterFactory.create())

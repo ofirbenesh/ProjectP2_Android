@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectp2_android.MyApplication;
@@ -22,6 +23,8 @@ import com.example.projectp2_android.entities.GlobalVariables;
 
 import com.example.projectp2_android.entities.Post;
 import com.example.projectp2_android.R;
+import com.example.projectp2_android.viewmodels.PostsViewModel;
+import com.example.projectp2_android.viewmodels.UserViewModel;
 
 import java.util.List;
 
@@ -78,10 +81,12 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
     private final LayoutInflater mInflater;
     private List<Post> posts;
     private Context context;
+    private UserViewModel userViewModel;
 
-    public PostsListAdapter(Context context) {
+    public PostsListAdapter(Context context, UserViewModel userViewModel) {
         mInflater = LayoutInflater.from(context);
         this.context = context;
+        this.userViewModel = userViewModel;
     }
 
     @NonNull
@@ -202,7 +207,14 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
                 }
             });
 
-            // add Friend onClick TODO
+            // add Friend onClick
+            holder.addFriendButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String friendID = current.getUserID();
+                    userViewModel.sendFriendRequest(friendID);
+                }
+            });
 //            if (current.getUserID().isFriendOf()) {
 //                holder.addFriendButton.setVisibility(View.VISIBLE);
 //            }

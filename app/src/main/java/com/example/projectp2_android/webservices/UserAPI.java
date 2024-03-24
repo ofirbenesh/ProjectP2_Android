@@ -110,19 +110,18 @@ public class UserAPI {
                 if (response.isSuccessful() && response.body() != null) {
                     User activeUser = response.body();
                     MyApplication.activeUser = activeUser;
-//                callback.onSuccess(activeUser);
+                callback.onSuccess("");
                 }
                 else {
                     Log.d("Login", "Login failed: " + response.message());
                     // Handle login failure
-//                    callback.onFail();
+                    callback.onFail();
                 }
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {}
         });
     }
-
 
 
 }

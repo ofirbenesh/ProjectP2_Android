@@ -47,10 +47,10 @@ public interface WebServiceAPI {
     Call<List<User>> getFriends(@Header("Authorization") String token, @Path("id") String userId);
 
     @POST("users/{id}/friends")
-    Call<Void> sendFriendRequest(@Path("id") String userId, @Path("id") String friendId);
+    Call<Void> sendFriendRequest(@Header("Authorization") String token, @Path("id") String userId, @Path("id") String friendId);
 
     @GET("users/{id}/friends/requests")
-    Call<JsonObject> getFriendRequests(@Path("id") String userId);
+    Call<List<User>> getFriendRequests(@Header("Authorization") String authToken);
 
     @POST("users/{id}/friends/approve/{fid}")
     Call<Void> approveFriendRequest(@Path("id") String userId, @Path("fid") String friendId);

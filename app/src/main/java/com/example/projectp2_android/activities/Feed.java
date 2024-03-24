@@ -34,6 +34,7 @@ import com.example.projectp2_android.adapters.PostsListAdapter;
 import com.example.projectp2_android.entities.GlobalVariables;
 import com.example.projectp2_android.entities.Post;
 import com.example.projectp2_android.viewmodels.PostsViewModel;
+import com.example.projectp2_android.viewmodels.UserViewModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -55,6 +56,7 @@ public class Feed extends AppCompatActivity {
     private static PostsListAdapter adapter;
     private boolean isPhotoAttached;
     private PostsViewModel viewModel;
+    private UserViewModel userViewModel;
     private LocalDatabase db;
     private String imageBase64;
 
@@ -68,9 +70,11 @@ public class Feed extends AppCompatActivity {
         profileImageView = findViewById(R.id.profileImageView);
         TextView userNameText = findViewById(R.id.userName);
         userNameText.setText(MyApplication.loggedUser);
-        String profilePicBase64 = MyApplication.activeUser.getProfilePhoto();
-        Bitmap profileBitmap = MyApplication.decodeBase64ToBitmap(profilePicBase64);
-        profileImageView.setImageBitmap(profileBitmap);
+//        String profilePicBase64 = MyApplication.activeUser.getProfilePhoto();
+//        Bitmap profileBitmap = MyApplication.decodeBase64ToBitmap(profilePicBase64);
+//        profileImageView.setImageBitmap(profileBitmap);
+
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         db = Room.databaseBuilder(getApplicationContext(), LocalDatabase.class, "FooDB")
                 .allowMainThreadQueries().build();
@@ -78,7 +82,7 @@ public class Feed extends AppCompatActivity {
 
         //region recyclerView
         lstPosts = findViewById(R.id.lstPosts);
-        final PostsListAdapter adapterOnCreate = new PostsListAdapter(this);
+        final PostsListAdapter adapterOnCreate = new PostsListAdapter(this, userViewModel);
         adapter = adapterOnCreate;
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
@@ -171,7 +175,7 @@ public class Feed extends AppCompatActivity {
 
         //region recyclerView
         lstPosts = findViewById(R.id.lstPosts);
-        final PostsListAdapter adapterOnCreate = new PostsListAdapter(this);
+        final PostsListAdapter adapterOnCreate = new PostsListAdapter(this, userViewModel);
         adapter = adapterOnCreate;
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
