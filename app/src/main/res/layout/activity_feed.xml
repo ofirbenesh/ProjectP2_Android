@@ -30,7 +30,9 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/facebook"
-        android:text="signout">
+        android:text="signout"
+        android:textSize="14dp"
+        >
 
     </Button>
 

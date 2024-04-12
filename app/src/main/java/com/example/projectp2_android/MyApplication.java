@@ -10,7 +10,10 @@ import androidx.lifecycle.LiveData;
 
 import com.example.projectp2_android.entities.User;
 
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 public class MyApplication extends Application {
     public static Context context;
@@ -18,6 +21,8 @@ public class MyApplication extends Application {
     public static String loggedUserID;
     public static User activeUser;
     public static String loggerUserToken;
+    public static boolean isLogged;
+    public static List<User> activeUserFriends;
 
     @Override
     public void onCreate() {
@@ -27,6 +32,8 @@ public class MyApplication extends Application {
         loggerUserToken = "";
         activeUser = null;
         loggedUserID = null;
+        activeUserFriends = null;
+        isLogged = false;
     }
 
     // function to convert photo from db so it can be presented on app
@@ -49,5 +56,30 @@ public class MyApplication extends Application {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
+    public static String getUserIdFromToken(String token) {
+        try {
+            String[] parts = token.split("\\.");
+            if (parts.length == 3) {
+                String base64Payload = parts[1];
+                byte[] decodedBytes = Base64.decode(base64Payload, Base64.URL_SAFE);
+                String payload = new String(decodedBytes, "UTF-8");
+                JSONObject jsonPayload = new JSONObject(payload);
+                MyApplication.loggedUserID = jsonPayload.getString("id");
+                return jsonPayload.getString("id"); // Use "id" to match your token structure
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; // Token is invalid or userId not found
+    }
+    public static boolean isFriendOf(String userId) {
+        for (User friend : activeUserFriends) {
+            if (friend.getUserID().equals(userId)) {
+                return true; // Found the user in the friends list
+            }
+        }
+        return false; // User not found in the friends list
     }
 }

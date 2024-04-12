@@ -70,9 +70,9 @@ public class Feed extends AppCompatActivity {
         profileImageView = findViewById(R.id.profileImageView);
         TextView userNameText = findViewById(R.id.userName);
         userNameText.setText(MyApplication.loggedUser);
-//        String profilePicBase64 = MyApplication.activeUser.getProfilePhoto();
-//        Bitmap profileBitmap = MyApplication.decodeBase64ToBitmap(profilePicBase64);
-//        profileImageView.setImageBitmap(profileBitmap);
+        String profilePicBase64 = MyApplication.activeUser.getProfilePhoto();
+        Bitmap profileBitmap = MyApplication.decodeBase64ToBitmap(profilePicBase64);
+        profileImageView.setImageBitmap(profileBitmap);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
@@ -86,7 +86,7 @@ public class Feed extends AppCompatActivity {
         adapter = adapterOnCreate;
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
-        loadPosts();
+//        loadPosts();
 
         viewModel = new ViewModelProvider(this).get(PostsViewModel.class);
         viewModel.get().observe(this, posts -> {

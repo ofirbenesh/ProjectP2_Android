@@ -41,7 +41,7 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
         private final ImageButton commentButton;
         private final ImageButton editPostButton;
         private final ImageButton deletePostButton;
-        private final Button addFriendButton;
+        private final ImageButton addFriendButton;
         private LinearLayout popupLayoutShare;
         private LinearLayout popupLayoutEdit;
         private View overlay;
@@ -213,6 +213,7 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
                 public void onClick(View v) {
                     String friendID = current.getUserID();
                     userViewModel.sendFriendRequest(friendID);
+                    holder.addFriendButton.setImageResource(R.drawable.friendsent);
                 }
             });
 //            if (current.getUserID().isFriendOf()) {

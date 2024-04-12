@@ -63,12 +63,6 @@ public class MainActivity extends AppCompatActivity implements CallBack {
             }
         });
 
-
-        Button moveButton = findViewById(R.id.moveBtn);
-        moveButton.setOnClickListener(view -> {
-            Intent i = new Intent(MainActivity.this, Feed.class);
-            startActivity(i);
-        });
     }
 
     @Override

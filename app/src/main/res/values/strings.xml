@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">ProjectP2_Android</string>
-    <string name="serverUrl">http://10.100.102.103:3001/api/</string>
+    <string name="serverUrl">http://10.0.0.22:3001/api/</string>
 </resources>

@@ -14,7 +14,7 @@ public class Post {
     @PrimaryKey(autoGenerate = true)
 
     private int id;
-    String userID;
+    private String userID;
     private String author;
     private String content;
 
@@ -72,8 +72,8 @@ public class Post {
         return userID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserID(String userId) {
+        this.userID = userId;
     }
 
     public void setPhoto(String photo) {

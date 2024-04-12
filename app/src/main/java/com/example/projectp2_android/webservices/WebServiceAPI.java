@@ -1,5 +1,6 @@
 package com.example.projectp2_android.webservices;
 
+import com.example.projectp2_android.entities.FriendRequestsResponse;
 import com.example.projectp2_android.entities.Post;
 import com.example.projectp2_android.entities.User;
 import com.google.gson.JsonObject;
@@ -49,8 +50,10 @@ public interface WebServiceAPI {
     @POST("users/{id}/friends")
     Call<Void> sendFriendRequest(@Header("Authorization") String token, @Path("id") String userId, @Path("id") String friendId);
 
-    @GET("users/{id}/friends/requests")
-    Call<List<User>> getFriendRequests(@Header("Authorization") String authToken);
+//    @GET("users/{id}/friend-requests")
+//    Call<List<User>> getFriendRequests(@Header("Authorization") String token, @Path("id") String userId);
+    @GET("users/{id}/friend-requests/android")
+    Call<List<User>> getFriendRequestsAndroid(@Header("Authorization") String token, @Path("id") String userId);
 
     @POST("users/{id}/friends/approve/{fid}")
     Call<Void> approveFriendRequest(@Path("id") String userId, @Path("fid") String friendId);

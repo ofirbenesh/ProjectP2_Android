@@ -52,7 +52,6 @@ public class UserAPI {
             // response is received from the server
             @Override
             public void onResponse(@NonNull Call<JsonObject> call, @NonNull Response<JsonObject> response) {
-                Log.d("failure", response.message().toString());
                 if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
                     // add new user to the room database
                     //user.setProfilePic(profilePic);
@@ -81,6 +80,7 @@ public class UserAPI {
                 if (response.isSuccessful() && response.body() != null) {
                     String token = response.body().get("token").getAsString();
                     MyApplication.loggerUserToken = token;
+
                     viewModel.updateToken(token);
                     Log.d("Login", "Token: " + token);
                     // Proceed with login
@@ -108,9 +108,13 @@ public class UserAPI {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    User activeUser = response.body();
-                    MyApplication.activeUser = activeUser;
-                callback.onSuccess("");
+                    User returnedUser = response.body();
+                    if (!MyApplication.isLogged) {
+                        MyApplication.activeUser = response.body();
+                        MyApplication.isLogged = true;
+                        MyApplication.activeUser.setUserID(userID);
+                    }
+//                callback.onSuccess(authToken);
                 }
                 else {
                     Log.d("Login", "Login failed: " + response.message());
@@ -119,7 +123,9 @@ public class UserAPI {
                 }
             }
             @Override
-            public void onFailure(Call<User> call, Throwable t) {}
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.d("getUser", "get user failed: " + t.getMessage());
+            }
         });
     }
 
