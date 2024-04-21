@@ -13,9 +13,13 @@ focusing on user interactions such as posting updates, commenting, and managing 
 - **Data Validation:** Ensures all user input is valid and alerts the user if any corrections are needed.
 - **Privacy Settings:** Users can configure their privacy preferences during registration, deciding what information is visible to others.
 
+![signup](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/6a104f83-49a2-4463-84da-77a1d5970ab3)
+
 **Login page:**
 - **Authentication:** Users can log in using their user name and password. The page includes mechanisms to handle authentication securely.
 - **sign up:** Users that dont have an account can move to the sign up page to create one.
+
+![login](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/28a0562e-73f8-4f63-9f05-f6bf4bfdb823)
 
 **Feed page:**
 - **Post Updates:** Users can post text updates and upload photos. Each post allows interactions such as likes and comments.
@@ -23,17 +27,16 @@ focusing on user interactions such as posting updates, commenting, and managing 
 - **Interactive Elements:** Each post includes like buttons and options to comment, similar to the traditional Facebook interface.
 - **Popup Menu:** Offers additional user options like 'Delete My Account' and 'Sign Out' through an accessible popup menu.
 
-
-![likes](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/0d11a95a-65f5-4b55-ad14-98d4d0b6b45e)
-![post](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/36581391-d20b-4573-9d39-976e65f2ffe5)
+![post](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/2c0df31b-089c-4779-8c66-dd96e435865f)
+![feed](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/af5ba9ae-7f97-4e9d-b374-41ea58e75977)
 
 * **Friends page:**
 - **Friend List Management:** Users can see a list of their friends and delete friends.
 - **Friend Requests:** Allows sending, receiving, and managing friend requests.
 - in feed, the user will be able to send friend requests to users who are not in their friends list.
 
-![friendReq](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/223eb685-6269-42b7-a7b5-68d973bef8a3)
-![feed](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/f1052d7c-9506-400d-83a0-59dc13bf9774)
+![friends](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/9b0eb122-4619-408e-b23b-7bf54554e600)
+![likes](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/4867024a-1e79-4814-acd3-c96ab75662b6)
 
 ## Installing And Executing
     
