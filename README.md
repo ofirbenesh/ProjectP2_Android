@@ -26,6 +26,7 @@ focusing on user interactions such as posting updates, commenting, and managing 
 - **Real-Time Updates:** Utilizes a swipe-to-refresh functionality to ensure that the feed shows the latest posts without needing to restart the app.
 - **Interactive Elements:** Each post includes like buttons and options to comment, similar to the traditional Facebook interface.
 - **Popup Menu:** Offers additional user options like 'Delete My Account' and 'Sign Out' through an accessible popup menu.
+- **Other user's profile:** when clicking on another user's name on post, if you're friends you can see the friend's posts
 
 ![post](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/2c0df31b-089c-4779-8c66-dd96e435865f)
 ![feed](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/af5ba9ae-7f97-4e9d-b374-41ea58e75977)
