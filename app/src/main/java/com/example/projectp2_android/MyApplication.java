@@ -7,7 +7,9 @@ import android.graphics.BitmapFactory;
 import android.util.Base64;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Room;
 
+import com.example.projectp2_android.db.UsersDB;
 import com.example.projectp2_android.entities.User;
 
 import org.json.JSONObject;
@@ -23,6 +25,7 @@ public class MyApplication extends Application {
     public static String loggerUserToken;
     public static boolean isLogged;
     public static List<User> activeUserFriends;
+    public static UsersDB usersDB;
 
     @Override
     public void onCreate() {
@@ -34,6 +37,8 @@ public class MyApplication extends Application {
         loggedUserID = null;
         activeUserFriends = null;
         isLogged = false;
+        usersDB = Room.databaseBuilder(context, UsersDB.class, "user")
+                .allowMainThreadQueries().fallbackToDestructiveMigration().build();
     }
 
     // function to convert photo from db so it can be presented on app
@@ -76,7 +81,7 @@ public class MyApplication extends Application {
     }
     public static boolean isFriendOf(String userId) {
         for (User friend : activeUserFriends) {
-            if (friend.getUserID().equals(userId)) {
+            if (friend.getUserId().equals(userId)) {
                 return true; // Found the user in the friends list
             }
         }

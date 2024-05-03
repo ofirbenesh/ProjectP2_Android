@@ -6,15 +6,19 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Post {
+public class Post implements Serializable {
     @PrimaryKey(autoGenerate = true)
-
     private int id;
-    private String userID;
+    @SerializedName("_id")
+    private String postId;
+    private String userId;
     private String author;
     private String content;
 
@@ -30,8 +34,8 @@ public class Post {
     private boolean isLiked;
     // Constructor match to server
 
-    public Post(String userID, String content, String photo, String author) {
-        this.userID = userID;
+    public Post(String userId, String content, String photo, String author) {
+        this.userId = userId;
         this.content = content;
         this.photo = photo;
         this.author = author;
@@ -68,12 +72,20 @@ public class Post {
         this.isLiked = false;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getUserId() {
+        return userId;
     }
 
     public void setUserID(String userId) {
-        this.userID = userId;
+        this.userId = userId;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 
     public void setPhoto(String photo) {
@@ -179,6 +191,7 @@ public class Post {
     public void setLiked(boolean liked) {
         isLiked = liked;
     }
+
 
 //    public void setPicUri(Uri picUri) {
 //        this.picUri = picUri;

@@ -21,7 +21,7 @@ public abstract class UsersDB extends RoomDatabase {
             synchronized (UsersDB.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    UsersDB.class, "users_database")
+                                    UsersDB.class, "user")
                             .fallbackToDestructiveMigration()
                             .build();
                 }

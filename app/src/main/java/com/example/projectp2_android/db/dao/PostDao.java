@@ -19,11 +19,13 @@ public interface PostDao {
     Post get(int id);
 
     @Insert
-    void insert(Post... posts);
+    void insert(List<Post> posts);
 
     @Update
     void update(Post... posts);
     @Delete
     void delete(Post... posts);
+    @Query("DELETE FROM post")
+    void clear();
 }
 

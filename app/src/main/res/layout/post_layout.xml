@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
     android:layout_marginBottom="30dp">
 
     <LinearLayout
@@ -82,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddFriendBtn"
-        android:textSize="24dp"
+        android:textSize="20dp"
         android:text="description..."
         android:textColor="?attr/colorOnSurface">
 
@@ -91,7 +92,8 @@
     <ImageView
         android:id="@+id/postsImage"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
+        android:maxHeight="200dp"
         app:layout_constraintBottom_toTopOf="@+id/postsButtons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -126,7 +128,7 @@
 
     <LinearLayout
         android:id="@+id/postsButtons"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="50dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"

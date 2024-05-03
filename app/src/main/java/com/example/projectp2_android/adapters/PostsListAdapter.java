@@ -17,24 +17,30 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectp2_android.CallBack;
 import com.example.projectp2_android.MyApplication;
 import com.example.projectp2_android.activities.CommentsActivity;
+import com.example.projectp2_android.activities.UserProfileActivity;
 import com.example.projectp2_android.entities.GlobalVariables;
 
 import com.example.projectp2_android.entities.Post;
 import com.example.projectp2_android.R;
+import com.example.projectp2_android.entities.User;
 import com.example.projectp2_android.viewmodels.PostsViewModel;
 import com.example.projectp2_android.viewmodels.UserViewModel;
+import com.example.projectp2_android.webservices.UserAPI;
 
 import java.util.List;
 
 public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.PostViewHolder> {
-    class PostViewHolder extends RecyclerView.ViewHolder {
+    class PostViewHolder extends RecyclerView.ViewHolder implements CallBack {
+
         private final TextView tvAuthor;
         private final TextView tvContent;
         private final TextView tvDate;
         private final ImageView ivPic;
-        private final ImageView ivProfilePic;
+        private Bitmap profileBitmap;
+        private ImageView ivProfilePic;
         private final TextView tvLikes;
         private final ImageButton likeButton;
         private final ImageButton shareButton;
@@ -45,6 +51,7 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
         private LinearLayout popupLayoutShare;
         private LinearLayout popupLayoutEdit;
         private View overlay;
+        private UserAPI userApi;
 
         public PostViewHolder(View itemView) {
             super(itemView);
@@ -63,9 +70,12 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
             this.editPostButton = itemView.findViewById(R.id.editButton);
             this.deletePostButton = itemView.findViewById(R.id.deleteButton);
             this.addFriendButton = itemView.findViewById(R.id.AddFriendBtn);
+            this.userApi = new UserAPI();
+            this.userApi.setCallback(this);
         }
 
         //region for pop up share button
+
         public void togglePopup(LinearLayout layout) {
             if (layout.getVisibility() == View.VISIBLE) {
                 layout.setVisibility(View.GONE);
@@ -75,18 +85,40 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
                 overlay.setVisibility(View.VISIBLE);
             }
         }
-        //endregion
-    }
 
+        @Override
+        public void onSuccess(String token) {
+
+        }
+
+        @Override
+        public void onFail() {
+
+        }
+
+        @Override
+        public void userIsReturned(User user) {
+            String profilePicBase64 = user.getProfilePic();
+            if (profilePicBase64 != null && !profilePicBase64.equals("")) {
+                profileBitmap = MyApplication.decodeBase64ToBitmap(profilePicBase64);
+                return;
+//                    if (profileBitmap != null && this.ivProfilePic != null) {
+//                        ivProfilePic.setImageBitmap(profileBitmap);
+//                    }
+                }
+            }
+        }
     private final LayoutInflater mInflater;
+
     private List<Post> posts;
     private Context context;
     private UserViewModel userViewModel;
-
+    private PostsViewModel postsViewModel;
     public PostsListAdapter(Context context, UserViewModel userViewModel) {
         mInflater = LayoutInflater.from(context);
         this.context = context;
         this.userViewModel = userViewModel;
+        this.postsViewModel = new PostsViewModel();
     }
 
     @NonNull
@@ -109,8 +141,14 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
                 holder.ivPic.setImageBitmap(profileBitmap);
             }
 
+            String authorId = current.getUserId();
+            holder.userApi.getUserById(authorId);
+            if (holder.profileBitmap != null) {
+                holder.ivProfilePic.setImageBitmap(holder.profileBitmap);
+            }
+
             // TODO take care of time
-//            holder.tvDate.setText(current.getDate());
+            holder.tvDate.setText("");
 
             int numberOfLikes = current.getLikes();
             holder.tvLikes.setText(String.valueOf(numberOfLikes));
@@ -148,7 +186,7 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
             });
 
             // edit button onclick
-            if (current.getAuthor().equals(GlobalVariables.userName)) {
+            if (current.getAuthor().equals(MyApplication.loggedUser)) {
                 holder.editPostButton.setVisibility(View.VISIBLE);
                 holder.editPostButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -165,6 +203,7 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
                                 public void onClick(View v) {
                                     current.setContent(newContent.getText().toString());
                                     holder.tvContent.setText(newContent.getText().toString());
+                                    postsViewModel.updatePost(current);
                                 }
                             });
                     }
@@ -211,17 +250,17 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
             holder.addFriendButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String friendID = current.getUserID();
+                    String friendID = current.getUserId();
                     userViewModel.sendFriendRequest(friendID);
                     holder.addFriendButton.setImageResource(R.drawable.friendsent);
                 }
             });
-//            if (current.getUserID().isFriendOf()) {
-//                holder.addFriendButton.setVisibility(View.VISIBLE);
-//            }
-//            else {
-//                holder.addFriendButton.setVisibility(View.GONE);
-//            }
+            if (MyApplication.isFriendOf(current.getUserId())) {
+                holder.addFriendButton.setVisibility(View.GONE);
+            }
+            else {
+                holder.addFriendButton.setVisibility(View.VISIBLE);
+            }
 
             // move to comments page for a specific post
             holder.commentButton.setOnClickListener(v -> {
@@ -229,8 +268,21 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
                 if (currentPosition != RecyclerView.NO_POSITION) {
                     Post currentPost = posts.get(currentPosition);
                     Intent intent = new Intent(context, CommentsActivity.class);
-                    intent.putExtra("POST_ID", currentPost.getId());
                     context.startActivity(intent);
+                }
+            });
+
+            // when clicking on another user's name, go to the user's profile
+            holder.tvAuthor.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = holder.getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        Post post = posts.get(position);
+                        Intent intent = new Intent(context, UserProfileActivity.class);
+                        intent.putExtra("userId", post.getUserId());
+                        context.startActivity(intent);
+                    }
                 }
             });
         }

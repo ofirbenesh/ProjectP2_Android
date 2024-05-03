@@ -14,6 +14,7 @@ public class PostsViewModel extends ViewModel {
          private PostsRepository repository;
 
          private LiveData<List<Post>> posts;
+    private LiveData<List<Post>> userPosts;
 
          public PostsViewModel () {
          repository = new PostsRepository();
@@ -23,8 +24,17 @@ public class PostsViewModel extends ViewModel {
          public LiveData<List<Post>> get() { return posts; }
 
          public void add(Post post) { repository.add(post); }
-//
-//         public void delete(Post post) { repository.delete(post); }
-//
-//         public void reload() { repository.reload(); }
+
+    public void updatePost(Post post) {
+        repository.updatePost(post);
+    }
+
+    public void deletePost(Post post) {
+        repository.deletePost(post);
+    }
+
+    public LiveData<List<Post>> getUserPosts(String userId) {
+        userPosts = repository.getUserPosts(userId);
+        return userPosts;
+    }
  }

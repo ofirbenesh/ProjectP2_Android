@@ -10,18 +10,22 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
+import com.google.gson.annotations.SerializedName;
+
 @Entity
 public class User implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String userID;
 
+    @SerializedName("_id")
+    private String userId;
     private String firstName;
-
     private String lastName;
     private String email;
     private String password;
     private String username;
+
+    @SerializedName("profilePhoto")
     private String profilePhoto;
     @Ignore
     private List<String> friends;
@@ -46,12 +50,12 @@ public class User implements Serializable {
     public int getId() { return id; }
     public void setId(@NonNull int id) { this.id = id; }
 
-    public String getUserID() {
-        return userID;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserId(String userID) {
+        this.userId = userId;
     }
 
     public String getProfilePhoto() {

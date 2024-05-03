@@ -3,6 +3,8 @@ package com.example.projectp2_android.repositories;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.projectp2_android.CallBack;
+import com.example.projectp2_android.MyApplication;
 import com.example.projectp2_android.R;
 import com.example.projectp2_android.db.LocalDatabase;
 import com.example.projectp2_android.db.UsersDB;
@@ -33,21 +35,29 @@ public class UserRepository {
     public void getUser(String userId) {
         userAPI.getUserById(userId);
     }
+
+    public User getUserFromRoom(String userId) {
+        return userAPI.getUser(userId);
+    }
 //
 //    public void setCallback(OperationCallback callback) {
 //        this.userAPI.setCallback(callback);
 //    }
 
-    public void addUser(String email,String username, String password, String picture) {
-        userAPI.addUser(email, username, password, picture);
+    public void addUser(String fullname, String email,String username, String password, String picture) {
+        userAPI.addUser(fullname, email, username, password, picture);
+    }
+
+    public void deleteUser(String userId) {
+        userAPI.deleteUser(userId);
     }
 
     class FriendsListData extends MutableLiveData<List<User>> {
+
         public FriendsListData() {
             super();
             setValue(new LinkedList<User>());
         }
-
         @Override
         protected void onActive() {
             super.onActive();
@@ -65,22 +75,28 @@ public class UserRepository {
 //                postListData.postValue(dao.index());
 //            }).start();
         }
-    }
 
-    public LiveData<List<User>> getAll() {
+    }
+    public MutableLiveData<List<User>> getAll() {
         return friendsListData;
     }
-    public LiveData<List<User>> getFriendRequestsData() {
+
+    public MutableLiveData<List<User>> getFriendRequestsData() {
         return friendRequestListData;
     }
-
     public void sendFriendRequest(String friendID) {
         friendAPI.sendFriendRequest(friendID);
     }
 
     public void getFriendRequests() { friendAPI.getFriendRequests();}
 
-//    public void addFriend(final Post post) {
-//
-//    }
+    public void acceptFriendRequest(String friendId) {
+        friendAPI.approveFriendRequest(friendId);
+    }
+    public void removeFriend(String friendId) {
+        friendAPI.removeFriend(friendId);
+    }
+    public void removeFriendRequest(String friendId) {
+        friendAPI.removeFriendRequest(friendId);
+    }
 }

@@ -10,10 +10,13 @@ import com.example.projectp2_android.db.dao.UserDao;
 import com.example.projectp2_android.entities.FriendRequestsResponse;
 import com.example.projectp2_android.entities.Post;
 import com.example.projectp2_android.entities.User;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -72,7 +75,10 @@ public class FriendAPI {
 
         String authToken = "Bearer " + MyApplication.loggerUserToken;
         String userId = MyApplication.loggedUserID;
-        Call<Void> call = webServiceApi.sendFriendRequest(authToken, userId, friendID);
+        JsonObject friendBody = new JsonObject();
+        friendBody.addProperty("userId", friendID);
+        Call<Void> call =  webServiceApi.sendFriendRequest(authToken, userId, friendBody);
+
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -84,7 +90,7 @@ public class FriendAPI {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.d("friendRequest", "falied to send friend request");
+                Log.d("friendRequest", "failed to send friend request");
             }
         });
     }
@@ -93,7 +99,7 @@ public class FriendAPI {
 
         String authToken = "Bearer " + MyApplication.loggerUserToken;
         String userId = MyApplication.loggedUserID;
-        Call<List<User>> call = webServiceApi.getFriendRequestsAndroid(authToken, userId);
+        Call<List<User>> call = webServiceApi.getFriendsRequestAndroid(authToken, userId);
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
@@ -112,6 +118,66 @@ public class FriendAPI {
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
                 Log.d("friendRequest", "falied to send friend requests");
+            }
+        });
+    }
+    public void approveFriendRequest(String friendID) {
+
+        String authToken = "Bearer " + MyApplication.loggerUserToken;
+        String userId = MyApplication.loggedUserID;
+        Call<Void> call = webServiceApi.approveFriendRequest(authToken, userId, friendID);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("friendRequest", "friend was added to friends list");
+                    getFriendRequests();
+                    // update local db
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("friendRequest", "failed to approve friend request");
+            }
+        });
+    }
+
+    public void removeFriend(String friendID) {
+
+        String authToken = "Bearer " + MyApplication.loggerUserToken;
+        String userId = MyApplication.loggedUserID;
+        Call<Void> call = webServiceApi.removeFriend(authToken, userId, friendID);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("friends", "friend was removed from friends list");
+                    getFriends();
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("friends", "failed to remove friend");
+            }
+        });
+    }
+
+    public void removeFriendRequest(String friendID) {
+
+        String authToken = "Bearer " + MyApplication.loggerUserToken;
+        String userId = MyApplication.loggedUserID;
+        Call<Void> call = webServiceApi.removeFriendRequest(authToken, userId, friendID);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("friends", "friend request was removed");
+                    getFriendRequests();
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("friends", "failed to remove friend request");
             }
         });
     }
