@@ -50,9 +50,10 @@ From your command line:
 $ git clone 
 
 # For running the Server - go into the repository.
-$ cd 
+$ cd gh repo clone ShiriGlam/projectseconed
 
 # start the server (copy the Server folder into a different project and execute it from there).
+$ npm install
 $ npm start
 
 # For running the Client - go into the repository.
@@ -60,3 +61,4 @@ $ cd
 
 # start the client.
 # You will have to use an emulator for an android application.
+# it will use the ip address 10.10.2.2
