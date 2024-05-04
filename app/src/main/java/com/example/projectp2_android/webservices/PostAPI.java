@@ -20,13 +20,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PostAPI {
     private MutableLiveData<List<Post>> postListData;
+    private MutableLiveData<List<Post>> userPostListData;
     private PostDao dao;
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
     CallBack callback;
 
-    public PostAPI(MutableLiveData<List<Post>> postListData, PostDao dao) {
+    public PostAPI(MutableLiveData<List<Post>> postListData, MutableLiveData<List<Post>> userPostListData, PostDao dao) {
         this.postListData = postListData;
+        this.userPostListData = userPostListData;
         this.dao = dao;
 
         // TODO connect URL to FooServer
@@ -46,10 +48,11 @@ public class PostAPI {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 postListData.postValue(response.body());
-//                new Thread(() -> {
-////                    dao.insert(posts);
+                List<Post> postList = response.body();
+                new Thread(() -> {
+                    dao.insert(postList);
 //                    postListData.postValue(dao.index());
-//                }).start();
+                }).start();
             }
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {}
@@ -58,7 +61,7 @@ public class PostAPI {
 
     public void addPost(Post post) {
         JsonObject postBody = new JsonObject();
-        postBody.addProperty("userID", post.getUserID());
+        postBody.addProperty("userID", post.getUserId());
         postBody.addProperty("content", post.getContent());
         postBody.addProperty("photo", post.getPhoto());
         postBody.addProperty("author", post.getAuthor());
@@ -72,11 +75,11 @@ public class PostAPI {
                 if (response.isSuccessful()) {
                     // Optionally update your local database or LiveData here
                     Log.d("AddPost", "Post added successfully");
-                    callback.onSuccess("Post added successfully");
+//                    callback.onSuccess("Post added successfully");
 
                 } else {
                     Log.d("AddPost", "Failed to add post");
-                    callback.onFail();
+//                    callback.onFail();
                 }
         }
 
@@ -85,6 +88,70 @@ public class PostAPI {
                 Log.d("AddPost", "Error adding post: " + t.getMessage());
                 callback.onFail();
             }
+        });
+    }
+
+    public void updatePost(Post post) {
+
+        String authToken = "Bearer " + MyApplication.loggerUserToken;
+        Call<Post> call = webServiceAPI.updatePost(authToken,post.getPostId(),post);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (response.isSuccessful()) {
+                    Log.d("editPost", "post was updated");
+                    get(postListData);
+                } else {
+                    Log.d("editPost", "Failed to update post");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                Log.d("AddPost", "Error adding post: " + t.getMessage());
+                callback.onFail();
+            }
+        });
+    }
+
+    public void deletePost(Post post) {
+
+        String authToken = "Bearer " + MyApplication.loggerUserToken;
+        Call<Void> call = webServiceAPI.deletePost(authToken, post.getPostId());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("editPost", "post was deleted");
+                    get(postListData);
+                } else {
+                    Log.d("editPost", "Failed to delete post");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("deletePost", "Error deleting post: " + t.getMessage());
+            }
+        });
+    }
+
+    public void getUserPosts(MutableLiveData<List<Post>> posts, String userId) {
+
+        String authToken = "Bearer " + MyApplication.loggerUserToken;
+        Call<List<Post>> call = webServiceAPI.getUserPosts(userId,authToken);
+        call.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                userPostListData.postValue(response.body());
+                List<Post> postList = response.body();
+//                new Thread(() -> {
+//                    dao.insert(postList);
+//                    postListData.postValue(dao.index());
+//                }).start();
+            }
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {}
         });
     }
 

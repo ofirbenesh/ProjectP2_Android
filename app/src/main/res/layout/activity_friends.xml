@@ -22,10 +22,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
+        android:layout_width="400dp"
         android:layout_height="80dp"
-        app:srcCompat="@drawable/facebook_logo"
-        app:tint="#3b5998"
+        app:srcCompat="@drawable/facebook_friends"
+        android:background="#365088"
         android:gravity="start"/>
 
         <androidx.recyclerview.widget.RecyclerView

@@ -63,25 +63,19 @@ public class MainActivity extends AppCompatActivity implements CallBack {
             }
         });
 
-
-        Button moveButton = findViewById(R.id.moveBtn);
-        moveButton.setOnClickListener(view -> {
-            Intent i = new Intent(MainActivity.this, Feed.class);
-            startActivity(i);
-        });
     }
 
     @Override
     public void onSuccess(String token) {
         runOnUiThread(() -> {
-            Intent intent = new Intent(MainActivity.this, Feed.class);
+//            Intent intent = new Intent(MainActivity.this, Feed.class);
             MyApplication.loggedUser = ((EditText) findViewById(R.id.user_name)).getText().toString();
             MyApplication.loggerUserToken = token;
 
             String userId = getUserIdFromToken(token);
             userApi.getUserById(userId);
-            startActivity(intent);
-            Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+//            startActivity(intent);
+//            Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -91,6 +85,18 @@ public class MainActivity extends AppCompatActivity implements CallBack {
             Toast.makeText(MainActivity.this, "Wrong username or password!", Toast.LENGTH_SHORT).show();
         });
     }
+
+    @Override
+    public void userIsReturned(User user) {
+        if (!MyApplication.isLogged) {
+            MyApplication.activeUser = user;
+            MyApplication.isLogged = true;
+        }
+        Intent intent = new Intent(MainActivity.this, Feed.class);
+        startActivity(intent);
+//        Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+    }
+
     public String getUserIdFromToken(String token) {
         try {
             String[] parts = token.split("\\.");

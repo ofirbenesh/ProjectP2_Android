@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.projectp2_android.CallBack;
 import com.example.projectp2_android.MyApplication;
 import com.example.projectp2_android.R;
 import com.example.projectp2_android.SignUpValidator;
@@ -24,11 +25,12 @@ import com.example.projectp2_android.entities.User;
 import com.example.projectp2_android.entities.GlobalVariables;
 import com.example.projectp2_android.viewmodels.SignUpViewModel;
 import com.example.projectp2_android.viewmodels.UserViewModel;
+import com.example.projectp2_android.webservices.UserAPI;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class SignUp extends AppCompatActivity {
+public class SignUp extends AppCompatActivity implements CallBack {
 
     private EditText fullnameET;
     private EditText usernameET;
@@ -41,10 +43,13 @@ public class SignUp extends AppCompatActivity {
     private SignUpViewModel signupViewModel;
     private boolean isSignupSuccessful;
     private String imageBase64;
+    private UserAPI userApi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        this.userApi = new UserAPI();
+        this.userApi.setCallback(this);
 
         init();
 
@@ -139,16 +144,14 @@ public class SignUp extends AppCompatActivity {
             if (SignUpValidator.isValidSignUpForm(fullnameET,
                     usernameET, passwordET, confpasswordET)) {
                 // Proceed with sign-up
-                Toast.makeText(SignUp.this, "Sign up successful!", Toast.LENGTH_SHORT).show();
-
                 this.userViewModel = new UserViewModel();
 
+                String fullname = fullnameET.getText().toString();
                 String username = usernameET.getText().toString();
                 String password = passwordET.getText().toString();
                 String email = emailET.getText().toString();
-                //String profileImageViewString = profilePictureUri.toString();
-                this.userViewModel.registerUser(email, username, password, imageBase64);
-                finish();
+//                String profileImageViewString = profilePictureUri.toString();
+                this.userApi.addUser(fullname, email, username, password, imageBase64);
             } else {
                 Toast.makeText(this, "Please Fill All Fields Correctly", Toast.LENGTH_SHORT).show();
             }
@@ -160,6 +163,19 @@ public class SignUp extends AppCompatActivity {
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
+    @Override
+    public void onSuccess(String token) {
+        Toast.makeText(SignUp.this, "Sign up successful!", Toast.LENGTH_SHORT).show();
+        finish();
+    }
 
+    @Override
+    public void onFail() {
+        Toast.makeText(SignUp.this, "Email or username is already taken.", Toast.LENGTH_LONG).show();
+    }
 
+    @Override
+    public void userIsReturned(User user) {
+
+    }
 }

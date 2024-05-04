@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -14,15 +15,20 @@ import com.example.projectp2_android.MyApplication;
 import com.example.projectp2_android.R;
 import com.example.projectp2_android.adapters.CommentListAdapter;
 import com.example.projectp2_android.adapters.FriendsListAdapter;
+import com.example.projectp2_android.entities.User;
 import com.example.projectp2_android.viewmodels.PostsViewModel;
 import com.example.projectp2_android.viewmodels.UserViewModel;
 import com.example.projectp2_android.webservices.FriendAPI;
 import com.example.projectp2_android.webservices.UserAPI;
 
+import java.util.List;
+
 public class FriendsActivity extends AppCompatActivity {
     private FriendAPI friendAPI;
     private UserViewModel friendsViewModel;
     private UserViewModel friendRequestsViewModel;
+    private static FriendsListAdapter adapter;
+    private static FriendsListAdapter adapter_req;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,29 +37,31 @@ public class FriendsActivity extends AppCompatActivity {
 
 //        this.friendAPI = new FriendAPI();
 
+        // get friends list from the server
+        friendsViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         RecyclerView lstFriends = findViewById(R.id.friendsList);
-        final FriendsListAdapter adapter = new FriendsListAdapter(this);
+        adapter = new FriendsListAdapter(this, false, friendsViewModel);
         lstFriends.setAdapter(adapter);
         lstFriends.setLayoutManager(new LinearLayoutManager(this));
 
-        // get friends list from the server
-        friendsViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         friendsViewModel.getFriends().observe(this, friends-> {
+            Log.d("FriendsActivity", "Friends list updated: " + friends.size() + " items.");
             adapter.setFriends(friends);
         });
-        friendsViewModel.getFriends();
+        List<User> friendsList = friendsViewModel.getFriends().getValue();
+        adapter.setFriends(friendsList);
+        MyApplication.activeUserFriends = friendsList;
 
+        friendRequestsViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         RecyclerView lstFriendRequests = findViewById(R.id.friendRequestList);
-        final FriendsListAdapter adapter_req = new FriendsListAdapter(this);
+        adapter_req = new FriendsListAdapter(this, true, friendRequestsViewModel);
         lstFriendRequests.setAdapter(adapter_req);
         lstFriendRequests.setLayoutManager(new LinearLayoutManager(this));
 
-        friendRequestsViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         friendRequestsViewModel.getFriendRequests().observe(this, friends-> {
             adapter_req.setFriends(friends);
         });
-        friendRequestsViewModel.getFriendRequests();
-
+        adapter_req.setFriends(friendRequestsViewModel.getFriendRequests().getValue());
 
         // Go back to feed
         ImageButton backButton = findViewById(R.id.backButton);
@@ -65,4 +73,9 @@ public class FriendsActivity extends AppCompatActivity {
         });
 
     }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        adapter.notifyDataSetChanged();
+//    }
 }

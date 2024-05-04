@@ -8,6 +8,7 @@ public class Comment implements Parcelable {
     private int commentId;
     private String author;
     private String text;
+    private int imageResourceId;
 
     public Comment(int commentId, String author, String text) {
         this.commentId = commentId;
@@ -29,6 +30,10 @@ public class Comment implements Parcelable {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public int getImageResourceId() {
+        return imageResourceId;
     }
 
     // Parcelable implementation

@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import java.util.Random;
+
 import com.example.projectp2_android.R;
 import com.example.projectp2_android.adapters.CommentListAdapter;
 import com.example.projectp2_android.adapters.PostsListAdapter;
@@ -24,6 +26,7 @@ import java.util.Objects;
 
 public class CommentsActivity extends AppCompatActivity {
     private List<Comment> listOfComments;
+    private Random random = new Random();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,32 +37,51 @@ public class CommentsActivity extends AppCompatActivity {
         lstComments.setAdapter(adapter);
         lstComments.setLayoutManager(new LinearLayoutManager(this));
 
-        // Temp comments list
+        // hardCoded comments list
         listOfComments = new ArrayList<>();
+        listOfComments.add(new Comment(1,"Monica geller","Get over it already"));
+        listOfComments.add(new Comment(2,"Janice Hosenstein","OH MY GOD"));
+        listOfComments.add(new Comment(3,"Joey Tribbiani","How you doin??"));
+        listOfComments.add(new Comment(4,"Chandler Bing","Could this BE any more random?"));
+        listOfComments.add(new Comment(5, "Ross Geller", "We were on a break!"));
+        listOfComments.add(new Comment(6, "Phoebe Buffay", "Smelly Cat, Smelly Cat, what are they feeding you?"));
+        listOfComments.add(new Comment(7, "Rachel Green", "It's like all my life everyone has always told me, 'You're a shoe!'"));
+        listOfComments.add(new Comment(8, "Gunther", "I thought that picture was good enough to frame!"));
+        listOfComments.add(new Comment(9, "Mike Hannigan", "I just bamboozled Chandler!"));
+        listOfComments.add(new Comment(10, "Richard Burke", "I've got a moustache!"));
 
-        // Fetch comments based on the Post ID passed from the previous Activity
-        int postId = getIntent().getIntExtra("POST_ID", -1);
-        String commentsAuthor = GlobalVariables.userName;
-        Post currPost = GlobalVariables.allPosts.get(postId);
-        adapter.setComments(listOfComments);
+        List<Comment> currComments = new ArrayList<>();
 
-        // Add new comment
-        Button postCommentBtn = findViewById(R.id.submitComment);
-        EditText inputText = findViewById(R.id.commentInput);
-        postCommentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                long currentTimeMillis = System.currentTimeMillis();
-                String commentText = Objects.requireNonNull(inputText.getText()).toString();
-                List<Comment> comments = new ArrayList<>();
-                //int profile_pic = getImageResourceFromImageView(profileImageView);
-                Comment comment = new Comment(1, commentsAuthor, commentText);
-//                currPost.addComment(comment);
-//                adapter.setComments(currPost.getAllComments());
-                listOfComments.add(comment);
-                adapter.setComments(listOfComments);
-            }
-        });
+        if (listOfComments.size() > 1) {
+            int firstIndex = random.nextInt(listOfComments.size());
+            int secondIndex;
+            do {
+                secondIndex = random.nextInt(listOfComments.size());
+            } while (secondIndex == firstIndex); // Ensure the two indices are not the same
+
+            currComments.add(listOfComments.get(firstIndex));
+            currComments.add(listOfComments.get(secondIndex));
+        }
+
+        adapter.setComments(currComments);
+
+//        // Add new comment
+//        Button postCommentBtn = findViewById(R.id.submitComment);
+//        EditText inputText = findViewById(R.id.commentInput);
+//        postCommentBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                long currentTimeMillis = System.currentTimeMillis();
+//                String commentText = Objects.requireNonNull(inputText.getText()).toString();
+//                List<Comment> comments = new ArrayList<>();
+//                //int profile_pic = getImageResourceFromImageView(profileImageView);
+//                Comment comment = new Comment(1, commentsAuthor, commentText);
+////                currPost.addComment(comment);
+////                adapter.setComments(currPost.getAllComments());
+//                listOfComments.add(comment);
+//                adapter.setComments(listOfComments);
+//            }
+//        });
 
         // Go back to feed
         ImageButton backButton = findViewById(R.id.backButton);

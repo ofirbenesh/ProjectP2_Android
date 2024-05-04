@@ -10,22 +10,28 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
+import com.google.gson.annotations.SerializedName;
+
 @Entity
 public class User implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
+
+    @SerializedName("_id")
+    private String userId;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String username;
+
+    @SerializedName("profilePhoto")
     private String profilePhoto;
+    @Ignore
+    private List<String> friends;
 
     @Ignore
-    private List<User> friends = new ArrayList<>();
-    @Ignore
-    private List<User> friendRequests = new ArrayList<>();
-
+    private List<String> friendRequests;
     @Ignore
     public User(String username, String password) {
         this.username = username;
@@ -40,9 +46,17 @@ public class User implements Serializable {
         this.username = username;
         this.profilePhoto = profilePhoto;
     }
-    public int getId() { return id; }
 
+    public int getId() { return id; }
     public void setId(@NonNull int id) { this.id = id; }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userID) {
+        this.userId = userId;
+    }
 
     public String getProfilePhoto() {
         return profilePhoto;
@@ -75,19 +89,19 @@ public class User implements Serializable {
     public String getProfilePic() { return profilePhoto; }
 
     public void setProfilePic(String profilePhoto) { this.profilePhoto = profilePhoto; }
-    public List<User> getFriends() {
+    public List<String> getFriends() {
         return friends;
     }
 
-    public void setFriends(List<User> friends) {
+    public void setFriends(List<String> friends) {
         this.friends = friends;
     }
-    public List<User> getFriendRequests() {
-        return friends;
+    public List<String> getFriendRequests() {
+        return friendRequests;
     }
 
-    public void setFriendRequests(List<User> friends) {
-        this.friends = friends;
+    public void setFriendRequests(List<String> friends) {
+        this.friendRequests = friends;
     }
 }
 

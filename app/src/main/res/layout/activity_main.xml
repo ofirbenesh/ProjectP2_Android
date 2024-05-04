@@ -75,13 +75,6 @@
             android:textColor="@color/white"
             android:textAllCaps="false"/>
 
-        <Button
-            android:id="@+id/moveBtn"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:backgroundTint="#009688">
-
-        </Button>
 
     </LinearLayout>
 

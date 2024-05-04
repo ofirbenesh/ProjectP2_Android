@@ -17,13 +17,16 @@ import java.util.List;
 public class PostsRepository {
     private PostDao dao;
     private PostListData postListData;
+    private PostListData userPostListData;
     private PostAPI api;
+    private String userProfileId;
 
     public PostsRepository() {
         LocalDatabase db = LocalDatabase.getInstance();
         dao = db.postDao();
         postListData = new PostListData();
-        api = new PostAPI(postListData, dao);
+        userPostListData = new PostListData();
+        api = new PostAPI(postListData, userPostListData, dao);
     }
 
     class PostListData extends MutableLiveData<List<Post>> {
@@ -43,9 +46,10 @@ public class PostsRepository {
             super.onActive();
 
             if (api == null) {
-                api = new PostAPI(postListData, dao);
+                api = new PostAPI(postListData, userPostListData, dao);
             }
             api.get(postListData);
+            api.getUserPosts(userPostListData, userProfileId);
 //            new Thread(() ->
 //            {
 //                // TODO check if dao.get
@@ -58,8 +62,21 @@ public class PostsRepository {
         return postListData;
     }
 
+    public LiveData<List<Post>> getUserPosts(String userId) {
+        userProfileId = userId;
+        return userPostListData;
+    }
+
     public void add(final Post post) {
         api.addPost(post);
+    }
+
+    public void updatePost(Post post) {
+        api.updatePost(post);
+    }
+
+    public void deletePost(Post post) {
+        api.deletePost(post);
     }
 }
 //
