@@ -73,9 +73,4 @@ public class FriendsActivity extends AppCompatActivity {
         });
 
     }
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        adapter.notifyDataSetChanged();
-//    }
 }
