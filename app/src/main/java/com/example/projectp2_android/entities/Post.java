@@ -1,99 +1,67 @@
 package com.example.projectp2_android.entities;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.google.gson.annotations.SerializedName;
+import com.example.projectp2_android.CommentsActivity;
+import com.example.projectp2_android.User;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Post implements Serializable {
+public class Post {
     @PrimaryKey(autoGenerate = true)
+
     private int id;
-    @SerializedName("_id")
-    private String postId;
-    private String userId;
     private String author;
     private String content;
-
-    private String photo;
-
     private int likes;
     private int pic;
-    //    private int profilePic;
-//    private Uri profilePicUri;
-//    private Uri picUri;
-//    private String date;
-//    private List<Comment> listOfComments;
+    private int profilePic;
+    private Uri profilePicUri;
+    private Uri picUri;
+    private String date;
+    private List<Comment> listOfComments;
     private boolean isLiked;
-    // Constructor match to server
 
-    public Post(String userId, String content, String photo, String author) {
-        this.userId = userId;
-        this.content = content;
-        this.photo = photo;
-        this.author = author;
-    }
-    @Ignore
+
+
     // a way to present picture
     public Post(int id, String author, String content, Uri pic, Uri profilePic, int likes, String date) {
         this.id = id;
         this.author = author;
         this.content = content;
         this.pic = -1;
-//        this.profilePic = -1;
-//        this.picUri = pic;
-//        this.profilePicUri = profilePic;
+        this.profilePic = -1;
+        this.picUri = pic;
+        this.date = date;
+        this.profilePicUri = profilePic;
         this.likes = likes;
-//        this.listOfComments = new ArrayList<>();
-//        this.date = date;
+        this.listOfComments = new ArrayList<>();
+        this.date = date;
         this.isLiked = false;
     }
 
-    @Ignore
+
     public Post(int id, String author, String content, int pic, int profilePic, int likes, String date) {
         this.id = id;
         this.author = author;
         this.content = content;
         this.pic = pic;
-//        this.profilePic = profilePic;
-//        this.picUri = null;
-//        this.date = date;
-//        this.profilePicUri = null;
+        this.profilePic = profilePic;
+        this.picUri = null;
+        this.date = date;
+        this.profilePicUri = null;
         this.likes = likes;
-//        this.listOfComments = new ArrayList<>();
-//        this.date = date;
+        this.listOfComments = new ArrayList<>();
+        this.date = date;
         this.isLiked = false;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserID(String userId) {
-        this.userId = userId;
-    }
-
-    public String getPostId() {
-        return postId;
-    }
-
-    public void setPostId(String postId) {
-        this.postId = postId;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public String getPhoto() {
-        return photo;
     }
 
     public int getId() {
@@ -121,21 +89,15 @@ public class Post implements Serializable {
     }
 
     public int getLikes() {
-        return likes;
+        return this.likes;
     }
 
-    public void addLike() {
+    public void setLikes(int i) {
+        this.likes = i;
+    }
+
+    public void incrementLikes() {
         this.likes += 1;
-    }
-
-    public void removeLike() {
-        if (this.likes > 0) {
-            this.likes -= 1;
-        }
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
     }
 
     public int getPic() {
@@ -146,42 +108,34 @@ public class Post implements Serializable {
         this.pic = pic;
     }
 
-//    public int getProfilePic() {
-//        return profilePic;
-//    }
-//
-//    public void setProfilePic(int profilePic) {
-//        this.profilePic = profilePic;
-//    }
-//    public void setProfilePicUri(Uri profilePic) {
-//        this.profilePicUri = profilePic;
-//    }
-//    public void addComment(Comment comment) {
-//        this.listOfComments.add(comment);
-//    }
-//    public List<Comment> getAllComments() {
-//        return listOfComments;
-//    }
-//
-//    public List<Comment> getListOfComments() {
-//        return listOfComments;
-//    }
-//
-//    public void setListOfComments(List<Comment> listOfComments) {
-//        this.listOfComments = listOfComments;
-//    }
-//
-//    public String getDate() {
-//        return date;
-//    }
-//
-//    public Uri getProfilePicUri() {
-//        return profilePicUri;
-//    }
-//
-//    public Uri getPicUri() {
-//        return picUri;
-//    }
+    public int getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(int profilePic) {
+        this.profilePic = profilePic;
+    }
+    public void setProfilePicUri(Uri profilePic) {
+        this.profilePicUri = profilePic;
+    }
+    public void addComment(Comment comment) {
+        this.listOfComments.add(comment);
+    }
+    public List<Comment> getAllComments() {
+        return listOfComments;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public Uri getProfilePicUri() {
+        return profilePicUri;
+    }
+
+    public Uri getPicUri() {
+        return picUri;
+    }
     // Existing fields and methods
 
     public boolean isLiked() {
@@ -192,8 +146,7 @@ public class Post implements Serializable {
         isLiked = liked;
     }
 
-
-//    public void setPicUri(Uri picUri) {
-//        this.picUri = picUri;
-//    }
+    public void setPicUri(Uri picUri) {
+        this.picUri = picUri;
+    }
 }
