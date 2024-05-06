@@ -19,7 +19,6 @@
         android:orientation="vertical"
         android:gravity="center">
 
-
         <EditText
             android:id="@+id/user_name"
             android:layout_width="match_parent"
@@ -34,7 +33,6 @@
             android:hint="Password"
             android:inputType="textPassword"
             android:padding="8dp"/>
-
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_login"
@@ -56,6 +54,7 @@
             android:textColor="#0523A5"
             android:textAllCaps="false">
         </TextView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,11 +69,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Create Foobook Account"
+            android:text="Create Facebook Account"
             android:textSize="22dp"
             android:backgroundTint="@color/green"
             android:textColor="@color/white"
             android:textAllCaps="false"/>
+
 
     </LinearLayout>
 

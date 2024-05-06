@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_centerInParent="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -20,27 +22,21 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="200dp"
-        android:layout_height="80dp"
-        app:srcCompat="@drawable/foobook2"
-        app:tint="#3b5998"
-        android:gravity="start"/>
-
-    <Button
-        android:id="@+id/signOut_btn"
-        android:layout_width="100dp"
         android:layout_height="50dp"
-        android:backgroundTint="@color/facebook"
-        android:text="signout">
+        app:srcCompat="@drawable/facebook_logo"
+        app:tint="#3b5998">
 
-    </Button>
+    </ImageView>
 
-    </LinearLayout>
-    <Switch
-        android:id="@+id/darkModeBtn"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Dark Mode"
-        android:textColor="?attr/colorOnSurface"/>
+            <Switch
+                android:id="@+id/darkModeBtn"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="Dark Mode"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginStart="50dp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
 
     <LinearLayout
         android:id="@+id/newPost"
@@ -75,7 +71,8 @@
             android:id="@+id/inputPost"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:hint="what's on your mind?"/>
+            android:hint="what's on your mind?"
+            android:textSize="16dp"/>
 
     </LinearLayout>
         <ImageView
@@ -90,58 +87,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="center"
+        android:layout_gravity="right"
         android:orientation="horizontal"
+        android:gravity="right"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="1dp"
-        android:background="#3b5998">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/biggerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"
-            app:icon="@drawable/inc_text"
-            app:iconSize="32dp"
-            app:iconTint="@color/black" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/smallerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"
-            app:icon="@drawable/dec_text"
-            app:iconSize="32dp"
-            app:iconTint="@color/black" />
-
-        <com.google.android.material.button.MaterialButton
+        <ImageButton
             android:id="@+id/addImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"
-            app:icon="@drawable/attach_img"
-            app:iconSize="32dp"
-            app:iconTint="@color/black" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/facebook"
+            app:srcCompat="@drawable/attach_img"
+            android:scaleType="fitCenter"
+            app:tint="@color/white" />
 
-
-        <com.google.android.material.button.MaterialButton
+        <ImageButton
             android:id="@+id/publishPost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"
-            app:icon="@drawable/post_icon"
-            app:iconSize="56dp"
-            app:iconTint="@color/black" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/facebook"
+            app:srcCompat="@drawable/post_icon"
+            android:scaleType="fitCenter"
+            app:tint="@color/white" />
 
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/posts"
-        android:layout_width="409dp"
+        android:layout_width="375dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -162,17 +136,46 @@
                 android:layout_height="match_parent" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <ImageView
-            android:id="@+id/menu"
-            android:layout_width="1100px"
-            android:layout_height="295px"
+        <LinearLayout
+            android:layout_width="380dp"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
             android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="@id/posts"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/menu_facebook">
+            app:layout_constraintBottom_toBottomOf="@id/posts">
 
-        </ImageView>
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/menu_feed"/>
+
+            <ImageButton
+                android:id="@+id/friendsBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/menu_friends__1_"/>
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/menu_videos"/>
+            <ImageButton
+                android:id="@+id/moreButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/menu_opt"/>
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

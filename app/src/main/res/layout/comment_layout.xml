@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:background="#D6DAE3">
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="409dp"
@@ -13,6 +13,17 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
         android:layout_marginStart="8dp">
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/default_profile_image" />
+
 
         <TextView
             android:id="@+id/commentingUser"
@@ -44,7 +55,9 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     app:srcCompat="@drawable/btn_like_blue"
-                    android:scaleType="fitCenter" />
+                    android:scaleType="fitCenter"
+                    android:contentDescription="Like comment"
+                    android:backgroundTint="@color/white"/>
 
             </LinearLayout>
 
