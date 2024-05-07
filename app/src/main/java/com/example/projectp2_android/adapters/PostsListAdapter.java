@@ -147,7 +147,6 @@ public class PostsListAdapter extends RecyclerView.Adapter<PostsListAdapter.Post
                 holder.ivProfilePic.setImageBitmap(holder.profileBitmap);
             }
 
-            // TODO take care of time
             holder.tvDate.setText("");
 
             int numberOfLikes = current.getLikes();
