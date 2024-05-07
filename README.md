@@ -31,13 +31,13 @@ focusing on user interactions such as posting updates, commenting, and managing 
 ![post](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/2c0df31b-089c-4779-8c66-dd96e435865f)
 ![feed](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/af5ba9ae-7f97-4e9d-b374-41ea58e75977)
 
-* **Friends page:**
-- **Friend List Management:** Users can see a list of their friends and delete friends.
-- **Friend Requests:** Allows sending, receiving, and managing friend requests.
-- in feed, the user will be able to send friend requests to users who are not in their friends list.
+**adding posts:**
+- **Bloom filter:** when trying to upload a post that contains a malicious address, the app will block the new post
+  
+![addingUrl](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/3326e076-714a-49f7-8336-f8824c4b23d6)
+![postFailed](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/94ba4aea-6fdb-49e0-bd79-a93a4da0f2f1)
 
-![friends](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/9b0eb122-4619-408e-b23b-7bf54554e600)
-![likes](https://github.com/ofirbenesh/ProjectP2_Android/assets/155812033/4867024a-1e79-4814-acd3-c96ab75662b6)
+
 
 ## Installing And Executing
     
@@ -47,7 +47,7 @@ From your command line:
   
 ```bash
 # Clone this repository.
-$ git clone 
+$ gh repo clone ofirbenesh/ProjectP2_Android
 
 # For running the Server - go into the repository.
 $ cd gh repo clone ShiriGlam/projectseconed
@@ -55,9 +55,6 @@ $ cd gh repo clone ShiriGlam/projectseconed
 # start the server (copy the Server folder into a different project and execute it from there).
 $ npm install
 $ npm start
-
-# For running the Client - go into the repository.
-$ cd 
 
 # start the client.
 # You will have to use an emulator for an android application.
