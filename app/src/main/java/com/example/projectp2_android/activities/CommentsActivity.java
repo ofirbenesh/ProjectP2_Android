@@ -65,24 +65,6 @@ public class CommentsActivity extends AppCompatActivity {
 
         adapter.setComments(currComments);
 
-//        // Add new comment
-//        Button postCommentBtn = findViewById(R.id.submitComment);
-//        EditText inputText = findViewById(R.id.commentInput);
-//        postCommentBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                long currentTimeMillis = System.currentTimeMillis();
-//                String commentText = Objects.requireNonNull(inputText.getText()).toString();
-//                List<Comment> comments = new ArrayList<>();
-//                //int profile_pic = getImageResourceFromImageView(profileImageView);
-//                Comment comment = new Comment(1, commentsAuthor, commentText);
-////                currPost.addComment(comment);
-////                adapter.setComments(currPost.getAllComments());
-//                listOfComments.add(comment);
-//                adapter.setComments(listOfComments);
-//            }
-//        });
-
         // Go back to feed
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
