@@ -1,6 +1,7 @@
 package com.example.projectp2_android.webservices;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -76,17 +77,19 @@ public class PostAPI {
                     // Optionally update your local database or LiveData here
                     Log.d("AddPost", "Post added successfully");
 //                    callback.onSuccess("Post added successfully");
-
+                    Toast.makeText(MyApplication.context, "Post added successfully", Toast.LENGTH_SHORT).show();
                 } else {
                     Log.d("AddPost", "Failed to add post");
 //                    callback.onFail();
+                    Toast.makeText(MyApplication.context, "Post was failed to upload", Toast.LENGTH_SHORT).show();
                 }
         }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
                 Log.d("AddPost", "Error adding post: " + t.getMessage());
-                callback.onFail();
+//                callback.onFail();
+                Toast.makeText(MyApplication.context, "Post was failed to upload", Toast.LENGTH_SHORT).show();
             }
         });
     }

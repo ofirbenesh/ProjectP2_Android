@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -21,6 +22,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +33,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectp2_android.CallBack;
 import com.example.projectp2_android.MyApplication;
 import com.example.projectp2_android.db.LocalDatabase;
 import com.example.projectp2_android.R;
@@ -41,6 +44,8 @@ import com.example.projectp2_android.entities.GlobalVariables;
 import com.example.projectp2_android.entities.Post;
 import com.example.projectp2_android.viewmodels.PostsViewModel;
 import com.example.projectp2_android.viewmodels.UserViewModel;
+import com.example.projectp2_android.webservices.PostAPI;
+import com.example.projectp2_android.webservices.UserAPI;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -155,7 +160,6 @@ public class Feed extends AppCompatActivity {
             }
         });
 
-
         // adding new post
         ImageButton postButton = findViewById(R.id.publishPost);
         inputText = findViewById(R.id.inputPost);
@@ -180,8 +184,15 @@ public class Feed extends AppCompatActivity {
                 }
                 Post post = new Post(MyApplication.activeUser.getUserId(), inputText.getText().toString(), imageBase64, MyApplication.loggedUser);
                 viewModel.add(post);
-//                loadPosts();
-                viewModel.get();
+                inputText.setText("");
+                loadPosts();
+//                viewModel.get();
+
+                // Hide the keyboard
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(inputText.getWindowToken(), 0);
+                }
             }
         });
 
@@ -274,4 +285,5 @@ public class Feed extends AppCompatActivity {
         MyApplication.isLogged = false;
         finish();
     }
+
 }
